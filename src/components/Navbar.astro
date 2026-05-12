@@ -1,4 +1,6 @@
 ---
+import site from "@data/site.json";
+
 export interface NavLink {
   href: string;
   label: string;
@@ -13,18 +15,11 @@ export interface Props {
 }
 
 const {
-  logoTitle = "Hargrove Wealth",
-  logoTag = "Advisory",
-  links = [
-    { href: "/", label: "Home" },
-    { href: "/about/", label: "About" },
-    { href: "/services/", label: "Services" },
-    { href: "/team/", label: "Team" },
-    { href: "/blog/", label: "Blog" },
-    { href: "/contact/", label: "Contact" },
-  ],
-  ctaLabel = "Book a Call",
-  ctaHref = "/contact/",
+  logoTitle = site.brand.title,
+  logoTag = site.brand.tag,
+  links = site.nav.links,
+  ctaLabel = site.nav.ctaLabel,
+  ctaHref = site.nav.ctaHref,
 } = Astro.props;
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";

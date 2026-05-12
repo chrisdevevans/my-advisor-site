@@ -2,56 +2,18 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import TeamCard from "@components/TeamCard.astro";
 import CTABanner from "@components/CTABanner.astro";
+import page from "@data/pages/team.json";
 
-const team = [
-  {
-    name: "Robert Hargrove, CFP®, CFA",
-    title: "Founding Partner",
-    bio:
-      "25 years of experience. Specializes in estate and retirement planning for executives and multi-generational families. Wharton MBA. Outside the office, you'll find him fly fishing in Montana or coaching his daughter's youth soccer team.",
-    credentials: ["CFP®", "CFA", "Wharton MBA"],
-    linkedin: "https://www.linkedin.com/",
-  },
-  {
-    name: "Sarah Whitfield, CFP®",
-    title: "Partner, Wealth Management",
-    bio:
-      "18 years of experience. Focuses on women navigating life transitions — divorce, widowhood, inheritance, business sale. CFA Institute member. An avid marathon runner with seven majors completed and one to go.",
-    credentials: ["CFP®", "CFA Member"],
-    linkedin: "https://www.linkedin.com/",
-  },
-  {
-    name: "David Kim, CPA, CFP®",
-    title: "Director of Tax Strategy",
-    bio:
-      "12 years of experience. Former Big 4 tax consultant. Specializes in business owners, real estate investors, and clients with complex multi-state tax pictures. Georgetown Law background. Quiet, methodical, and unusually fast with a spreadsheet.",
-    credentials: ["CFP®", "CPA", "JD"],
-    linkedin: "https://www.linkedin.com/",
-  },
-  {
-    name: "Aisha Osei, CFP®",
-    title: "Associate Advisor",
-    bio:
-      "6 years of experience. Our NextGen planning specialist — works with clients aged 30 to 50 on wealth accumulation, equity comp, and early-career planning. First-generation wealth builder herself, which makes her a particularly empathetic guide for clients in the same position.",
-    credentials: ["CFP®"],
-    linkedin: "https://www.linkedin.com/",
-  },
-];
+const { meta, hero, members, cta } = page;
 ---
 
-<BaseLayout
-  title="Our Team"
-  description="Meet the advisors at Hargrove Wealth Advisory — CFP®, CFA, and CPA professionals who carry small books so they can do deep work for each client."
->
+<BaseLayout title={meta.title} description={meta.description}>
   <section class="page-hero">
     <div class="container fade-up">
-      <span class="eyebrow">Our Team</span>
-      <h1>Meet Our Team.</h1>
+      <span class="eyebrow">{hero.eyebrow}</span>
+      <h1>{hero.heading}</h1>
       <hr class="gold-rule" />
-      <p class="lede">
-        Four advisors. Decades of combined experience. One philosophy: small books, deep work,
-        and a real relationship with every client.
-      </p>
+      <p class="lede">{hero.lede}</p>
     </div>
   </section>
 
@@ -60,7 +22,7 @@ const team = [
       <h2 id="team-grid" class="sr-only">Team Members</h2>
       <div class="team-grid">
         {
-          team.map((m) => (
+          members.map((m) => (
             <TeamCard
               name={m.name}
               title={m.title}
@@ -75,8 +37,10 @@ const team = [
   </section>
 
   <CTABanner
-    heading="Want to know who you'd be working with?"
-    description="Every initial conversation is with a partner — not an intake coordinator."
+    heading={cta.heading}
+    description={cta.description}
+    ctaLabel={cta.ctaLabel}
+    ctaHref={cta.ctaHref}
   />
 </BaseLayout>
 

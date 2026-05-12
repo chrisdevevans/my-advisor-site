@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "title": "Hargrove Wealth Advisory — Bespoke Wealth Management",
+    "description": "Independent, fee-only fiduciary financial advisors. Thoughtful wealth management for individuals, families, and institutions building long-term prosperity."
+  },
+  "hero": {
+    "headline": "Your Wealth. Thoughtfully Managed.",
+    "subheadline": "Bespoke financial planning for individuals, families, and institutions seeking long-term prosperity.",
+    "primaryCTA": { "label": "Schedule a Consultation", "href": "/contact/" },
+    "secondaryCTA": { "label": "Our Services", "href": "/services/" },
+    "trustItems": [
+      "20+ Years Experience",
+      "$2B+ Assets Managed",
+      "500+ Families Served"
+    ]
+  },
+  "servicesPreview": {
+    "eyebrow": "What We Do",
+    "heading": "Built around your life, not the market.",
+    "lede": "Three pillars of financial planning — designed to work together, not in isolation.",
+    "items": [
+      {
+        "icon": "chart",
+        "title": "Wealth Management",
+        "description": "Comprehensive planning that ties together investments, taxes, and your full financial picture.",
+        "href": "/services/#wealth-management"
+      },
+      {
+        "icon": "compass",
+        "title": "Retirement Planning",
+        "description": "Income mapping, Social Security strategy, and withdrawal plans built for 30+ year horizons.",
+        "href": "/services/#retirement-planning"
+      },
+      {
+        "icon": "shield",
+        "title": "Investment Strategy",
+        "description": "Evidence-based portfolios, risk-aligned allocation, and disciplined quarterly review.",
+        "href": "/services/#investment-management"
+      }
+    ]
+  },
+  "aboutTeaser": {
+    "eyebrow": "About the Firm",
+    "heading": "A firm built on independence and discipline.",
+    "leadParagraph": "We are independent, fee-only, and held to the fiduciary standard. We don't sell products. We don't earn commissions. We're paid by our clients to do one thing: act in their interest.",
+    "supportingParagraph": "For more than twenty years we've helped families navigate the inflection points of their financial lives — career transitions, business sales, retirement, inheritance — with the same patient, evidence-based approach.",
+    "linkLabel": "More about us",
+    "linkHref": "/about/",
+    "stats": [
+      { "value": "2003", "label": "Founded" },
+      { "value": "98%", "label": "Client Retention" },
+      { "value": "Fiduciary", "label": "Standard" },
+      { "value": "Fee-Only", "label": "Model" }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Client Stories",
+    "heading": "What our clients say.",
+    "items": [
+      {
+        "quote": "After 30 years building my career, I needed someone who would think about my finances the way I thought about my company. Hargrove gave me that — clarity, discipline, and a real plan.",
+        "name": "Margaret H.",
+        "role": "Retired Executive"
+      },
+      {
+        "quote": "We came in with a complicated picture — two businesses, real estate, kids in college. They untangled it without judgment and built something that finally feels coordinated.",
+        "name": "James & Priya Okafor",
+        "role": "Business Owners"
+      },
+      {
+        "quote": "I don't have time to manage this stuff and I shouldn't be the one doing it. They handle the heavy lifting and bring me into the decisions that actually matter.",
+        "name": "David Chen",
+        "role": "Surgeon"
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Ready to take control of your financial future?",
+    "description": "A conversation costs nothing. Clarity is the first step toward confidence.",
+    "ctaLabel": "Book a Free Call",
+    "ctaHref": "/contact/"
+  }
+}

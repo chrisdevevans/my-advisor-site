@@ -4,90 +4,33 @@ import HeroSection from "@components/HeroSection.astro";
 import ServiceCard from "@components/ServiceCard.astro";
 import TestimonialCard from "@components/TestimonialCard.astro";
 import CTABanner from "@components/CTABanner.astro";
+import page from "@data/pages/index.json";
 
-const heroData = {
-  headline: "Your Wealth. Thoughtfully Managed.",
-  subheadline:
-    "Bespoke financial planning for individuals, families, and institutions seeking long-term prosperity.",
-};
-
-const stats = [
-  { value: "2003", label: "Founded" },
-  { value: "98%", label: "Client Retention" },
-  { value: "Fiduciary", label: "Standard" },
-  { value: "Fee-Only", label: "Model" },
-];
-
-const services = [
-  {
-    icon: "chart" as const,
-    title: "Wealth Management",
-    description:
-      "Comprehensive planning that ties together investments, taxes, and your full financial picture.",
-    href: "/services/#wealth-management",
-  },
-  {
-    icon: "compass" as const,
-    title: "Retirement Planning",
-    description:
-      "Income mapping, Social Security strategy, and withdrawal plans built for 30+ year horizons.",
-    href: "/services/#retirement-planning",
-  },
-  {
-    icon: "shield" as const,
-    title: "Investment Strategy",
-    description:
-      "Evidence-based portfolios, risk-aligned allocation, and disciplined quarterly review.",
-    href: "/services/#investment-management",
-  },
-];
-
-const testimonials = [
-  {
-    quote:
-      "After 30 years building my career, I needed someone who would think about my finances the way I thought about my company. Hargrove gave me that — clarity, discipline, and a real plan.",
-    name: "Margaret H.",
-    role: "Retired Executive",
-  },
-  {
-    quote:
-      "We came in with a complicated picture — two businesses, real estate, kids in college. They untangled it without judgment and built something that finally feels coordinated.",
-    name: "James & Priya Okafor",
-    role: "Business Owners",
-  },
-  {
-    quote:
-      "I don't have time to manage this stuff and I shouldn't be the one doing it. They handle the heavy lifting and bring me into the decisions that actually matter.",
-    name: "David Chen",
-    role: "Surgeon",
-  },
-];
+const { meta, hero, servicesPreview, aboutTeaser, testimonials, cta } = page;
 ---
 
-<BaseLayout
-  title="Hargrove Wealth Advisory — Bespoke Wealth Management"
-  description="Independent, fee-only fiduciary financial advisors. Thoughtful wealth management for individuals, families, and institutions building long-term prosperity."
->
-  <!-- _editables: hero -->
+<BaseLayout title={meta.title} description={meta.description}>
   <HeroSection
-    headline={heroData.headline}
-    subheadline={heroData.subheadline}
+    headline={hero.headline}
+    subheadline={hero.subheadline}
+    ctas={[
+      { ...hero.primaryCTA, variant: "primary" },
+      { ...hero.secondaryCTA, variant: "ghost" },
+    ]}
+    trustItems={hero.trustItems}
   />
 
-  <!-- Services preview -->
   <section class="section" aria-labelledby="services-preview">
     <div class="container">
       <header class="section-head fade-up">
-        <span class="eyebrow">What We Do</span>
-        <h2 id="services-preview">Built around your life, not the market.</h2>
-        <p class="lede">
-          Three pillars of financial planning — designed to work together, not in isolation.
-        </p>
+        <span class="eyebrow">{servicesPreview.eyebrow}</span>
+        <h2 id="services-preview">{servicesPreview.heading}</h2>
+        <p class="lede">{servicesPreview.lede}</p>
       </header>
 
       <div class="services-grid">
         {
-          services.map((s) => (
+          servicesPreview.items.map((s) => (
             <ServiceCard
               icon={s.icon}
               title={s.title}
@@ -100,29 +43,20 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- About teaser -->
   <section class="about-teaser section" aria-labelledby="about-teaser">
     <div class="container about-teaser__grid">
       <div class="about-teaser__copy fade-up">
-        <span class="eyebrow">About the Firm</span>
-        <h2 id="about-teaser">A firm built on independence and discipline.</h2>
+        <span class="eyebrow">{aboutTeaser.eyebrow}</span>
+        <h2 id="about-teaser">{aboutTeaser.heading}</h2>
         <hr class="gold-rule" />
-        <p class="lede">
-          We are independent, fee-only, and held to the fiduciary standard. We don't sell products.
-          We don't earn commissions. We're paid by our clients to do one thing: act in their interest.
-        </p>
-        <p class="text-muted">
-          For more than twenty years we've helped families navigate the inflection points of their
-          financial lives — career transitions, business sales, retirement, inheritance — with the
-          same patient, evidence-based approach.
-        </p>
-        <a href="/about/" class="btn--link">More about us</a>
+        <p class="lede">{aboutTeaser.leadParagraph}</p>
+        <p class="text-muted">{aboutTeaser.supportingParagraph}</p>
+        <a href={aboutTeaser.linkHref} class="btn--link">{aboutTeaser.linkLabel}</a>
       </div>
 
       <ul class="stats fade-up">
-        <!-- _editables: stats -->
         {
-          stats.map((s) => (
+          aboutTeaser.stats.map((s) => (
             <li class="stats__item">
               <span class="stats__value">{s.value}</span>
               <span class="stats__label">{s.label}</span>
@@ -133,18 +67,17 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- Testimonials -->
   <section class="section section--testimonials" aria-labelledby="testimonials">
     <div class="container">
       <header class="section-head text-center fade-up">
-        <span class="eyebrow">Client Stories</span>
-        <h2 id="testimonials">What our clients say.</h2>
+        <span class="eyebrow">{testimonials.eyebrow}</span>
+        <h2 id="testimonials">{testimonials.heading}</h2>
         <hr class="gold-rule gold-rule--center" />
       </header>
 
       <div class="testimonials-grid">
         {
-          testimonials.map((t) => (
+          testimonials.items.map((t) => (
             <TestimonialCard quote={t.quote} name={t.name} role={t.role} />
           ))
         }
@@ -152,7 +85,12 @@ const testimonials = [
     </div>
   </section>
 
-  <CTABanner />
+  <CTABanner
+    heading={cta.heading}
+    description={cta.description}
+    ctaLabel={cta.ctaLabel}
+    ctaHref={cta.ctaHref}
+  />
 </BaseLayout>
 
 <style>

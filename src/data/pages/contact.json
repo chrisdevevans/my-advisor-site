@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "title": "Contact",
+    "description": "Schedule a free, no-obligation conversation with the team at Hargrove Wealth Advisory. Call (555) 280-4400 or send a message."
+  },
+  "hero": {
+    "eyebrow": "Contact",
+    "heading": "Let's Talk.",
+    "lede": "Your first conversation is always free and without obligation."
+  },
+  "info": {
+    "heading": "Get in touch",
+    "lede": "We're a small team and we answer our own phones. The fastest way to reach us is to call during business hours; otherwise email or the form on the right both work well.",
+    "labels": {
+      "phone": "Phone",
+      "email": "Email",
+      "office": "Office",
+      "hours": "Hours"
+    },
+    "mapLabel": "Visit Us — Financial District, NYC"
+  },
+  "form": {
+    "submitLabel": "Send Message",
+    "responseNote": "We typically respond within one business day.",
+    "successMessage": "Thanks — your message has been received. We'll be in touch shortly."
+  },
+  "calendly": {
+    "prompt": "Prefer to book directly?",
+    "buttonLabel": "Schedule on Calendly",
+    "buttonHref": "#"
+  }
+}

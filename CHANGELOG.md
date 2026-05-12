@@ -8,6 +8,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 
+- CloudCannon now shows the blog collection in the dashboard. The root `cloudcannon.config.yml` (which CloudCannon loads in preference to `.cloudcannon/config.yml`) was still pointing at the old starter's `src/content/pages` directory and used a `**/*.mdx` glob on the blog collection — so it saw zero pages and zero blog posts after the site rewrite. The root config has been replaced with a clean, matching configuration: `blog` collection at `src/content/blog`, glob `**/*.md`, with `title` / `date` / `author` / `excerpt` / `tags` / `image` inputs and a working "New Blog Post" schema.
+
 ### Changed
 
 - Switched the site identity from the generic component-library starter to the **Hargrove Wealth Advisory** financial-services site, with new design tokens (luxury dark + gold palette) and Playfair Display / DM Sans typography in `src/styles/global.css`.
@@ -22,7 +24,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Scroll-triggered fade-in-up animation via `IntersectionObserver`, with `prefers-reduced-motion` fallback.
 - CSS-drawn gold geometric line pattern in the home hero (no external assets required).
 - Three sample blog posts authored as long-form, real content on financial planning (high-earner mistakes, the bucket strategy, Roth conversions).
-- New `.cloudcannon/config.yml` with `blog` collection editing config — title/date/author/excerpt inputs and a `tags` multiselect.
+- CloudCannon `blog` collection editing config — title/date/author/excerpt inputs, a `tags` multiselect, image uploads under `public/uploads/`, and a new-post schema at `.cloudcannon/schemas/blog-post.md`.
 - `public/sitemap.xml` placeholder alongside the build-time `@astrojs/sitemap`-generated `/sitemap-index.xml`; `public/robots.txt` now references the sitemap URL.
 
 ## [1.0.2] - 2026-04-13

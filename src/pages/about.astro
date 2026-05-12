@@ -2,118 +2,48 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import TeamCard from "@components/TeamCard.astro";
 import CTABanner from "@components/CTABanner.astro";
+import page from "@data/pages/about.json";
 
-const values = [
-  {
-    title: "Fiduciary Duty",
-    icon: "shield",
-    body: "We are legally obligated to act in your interest. Always. No exceptions.",
-  },
-  {
-    title: "Transparency",
-    icon: "eye",
-    body: "Our fees are clear, our methods are documented, and our reasoning is shared.",
-  },
-  {
-    title: "Independence",
-    icon: "compass",
-    body: "We are owner-operated and unaffiliated with any product manufacturer.",
-  },
-  {
-    title: "Long-Term Thinking",
-    icon: "tree",
-    body: "We measure success in decades, not quarters. Patience compounds.",
-  },
-];
-
-const timeline = [
-  { year: "2003", text: "Founded by Robert Hargrove and a second partner with 12 founding clients." },
-  { year: "2008", text: "Navigated the financial crisis with disciplined rebalancing; no client took permanent losses on plan." },
-  { year: "2015", text: "Expanded service model to institutional and endowment clients." },
-  { year: "2020", text: "Launched digital planning tools for clients to view their full picture in one place." },
-  { year: "2024", text: "$2B in assets under management; 500+ households served." },
-];
-
-const teamPreview = [
-  {
-    name: "Robert Hargrove, CFP®, CFA",
-    title: "Founding Partner",
-    bio: "25 years of experience. Specializes in estate and retirement planning. Wharton MBA. Coaches youth soccer on weekends.",
-    credentials: ["CFP®", "CFA"],
-  },
-  {
-    name: "Sarah Whitfield, CFP®",
-    title: "Partner, Wealth Management",
-    bio: "18 years of experience. Focus on women in transition — divorce, widowhood, and inheritance. CFA Institute member.",
-    credentials: ["CFP®", "CFA Member"],
-  },
-  {
-    name: "David Kim, CPA, CFP®",
-    title: "Director of Tax Strategy",
-    bio: "12 years of experience. Former Big 4 tax consultant. Specializes in business owners and real estate investors.",
-    credentials: ["CFP®", "CPA"],
-  },
-];
+const { meta, hero, story, values, timeline, teamPreview, cta } = page;
 ---
 
-<BaseLayout
-  title="About Us"
-  description="An independent, fee-only, fiduciary financial advisory firm. Founded in 2003 to give clients clarity, confidence, and a plan built around their life."
->
-  <!-- Page hero -->
+<BaseLayout title={meta.title} description={meta.description}>
   <section class="page-hero">
     <div class="container fade-up">
-      <span class="eyebrow">About Us</span>
-      <h1>A different kind of advisory.</h1>
+      <span class="eyebrow">{hero.eyebrow}</span>
+      <h1>{hero.heading}</h1>
       <hr class="gold-rule" />
-      <p class="lede">
-        Independent, fee-only, fiduciary — and committed to the families and institutions we serve
-        for the long term.
-      </p>
+      <p class="lede">{hero.lede}</p>
     </div>
   </section>
 
-  <!-- Our Story -->
   <section class="section" aria-labelledby="our-story">
     <div class="container container--narrow story">
       <header class="fade-up">
-        <span class="eyebrow">Our Story</span>
-        <h2 id="our-story">Twenty years of disciplined work.</h2>
+        <span class="eyebrow">{story.eyebrow}</span>
+        <h2 id="our-story">{story.heading}</h2>
       </header>
 
       <div class="story__body fade-up">
-        <p>
-          Hargrove Wealth Advisory was founded in 2003 by two partners who had spent the previous
-          decade inside the largest names in finance and concluded the same thing: the brokerage
-          model wasn't designed around the client. They built something different — independent,
-          fee-only, and bound by the fiduciary standard. Twelve families took a chance on them in
-          the first year.
-        </p>
-        <p>
-          Twenty-plus years later, we serve more than 500 households and institutional clients
-          across the country. We've intentionally stayed boutique. We turn down more business than
-          we take. Our advisors carry small books because we believe the quality of advice depends on
-          the time we spend with each client — and the time we spend with the math.
-        </p>
+        <p>{story.paragraph1}</p>
+        <p>{story.paragraph2}</p>
         <p class="story__mission">
-          <strong>Our mission:</strong> to empower clients with clarity, confidence, and a plan
-          built around their life.
+          <strong>{story.missionLabel}</strong> {story.missionText}
         </p>
       </div>
     </div>
   </section>
 
-  <!-- Values -->
   <section class="section section--surface" aria-labelledby="values">
     <div class="container">
       <header class="section-head fade-up">
-        <span class="eyebrow">Our Values</span>
-        <h2 id="values">What we hold to.</h2>
+        <span class="eyebrow">{values.eyebrow}</span>
+        <h2 id="values">{values.heading}</h2>
       </header>
 
       <div class="values-grid">
         {
-          values.map((v) => (
+          values.items.map((v) => (
             <div class="value card fade-up">
               <div class="value__icon" aria-hidden="true">
                 {v.icon === "shield" && (
@@ -150,17 +80,16 @@ const teamPreview = [
     </div>
   </section>
 
-  <!-- Timeline -->
   <section class="section" aria-labelledby="timeline">
     <div class="container container--narrow">
       <header class="section-head fade-up">
-        <span class="eyebrow">Milestones</span>
-        <h2 id="timeline">Twenty-plus years, deliberately built.</h2>
+        <span class="eyebrow">{timeline.eyebrow}</span>
+        <h2 id="timeline">{timeline.heading}</h2>
       </header>
 
       <ol class="timeline">
         {
-          timeline.map((item) => (
+          timeline.items.map((item) => (
             <li class="timeline__item fade-up">
               <span class="timeline__year">{item.year}</span>
               <p class="timeline__text">{item.text}</p>
@@ -171,20 +100,17 @@ const teamPreview = [
     </div>
   </section>
 
-  <!-- Team preview -->
   <section class="section section--surface" aria-labelledby="team-preview">
     <div class="container">
       <header class="section-head fade-up">
-        <span class="eyebrow">Leadership</span>
-        <h2 id="team-preview">A small, experienced team.</h2>
-        <p class="lede">
-          You'll know your advisor by name and they'll know your story. That's the model.
-        </p>
+        <span class="eyebrow">{teamPreview.eyebrow}</span>
+        <h2 id="team-preview">{teamPreview.heading}</h2>
+        <p class="lede">{teamPreview.lede}</p>
       </header>
 
       <div class="team-preview-grid">
         {
-          teamPreview.map((m) => (
+          teamPreview.members.map((m) => (
             <TeamCard
               name={m.name}
               title={m.title}
@@ -196,12 +122,17 @@ const teamPreview = [
       </div>
 
       <div class="team-preview__cta fade-up">
-        <a href="/team/" class="btn btn--ghost">Meet the full team</a>
+        <a href={teamPreview.linkHref} class="btn btn--ghost">{teamPreview.linkLabel}</a>
       </div>
     </div>
   </section>
 
-  <CTABanner />
+  <CTABanner
+    heading={cta.heading}
+    description={cta.description}
+    ctaLabel={cta.ctaLabel}
+    ctaHref={cta.ctaHref}
+  />
 </BaseLayout>
 
 <style>

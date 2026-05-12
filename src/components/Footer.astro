@@ -1,69 +1,51 @@
 ---
-export interface Props {
-  brand?: string;
-  tagline?: string;
-}
-
-const {
-  brand = "Hargrove Wealth",
-  tagline = "Independent. Fee-only. Fiduciary. Thoughtful wealth management for the long term.",
-} = Astro.props;
+import site from "@data/site.json";
 
 const year = new Date().getFullYear();
+const { brand, footer, contact } = site;
 ---
 
 <footer class="footer">
   <div class="footer__top container">
     <div class="footer__col footer__brand">
       <a href="/" class="footer__logo">
-        <span class="footer__logo-title">{brand}</span>
-        <span class="footer__logo-tag">Advisory</span>
+        <span class="footer__logo-title">{brand.title}</span>
+        <span class="footer__logo-tag">{brand.tag}</span>
       </a>
-      <p class="footer__tagline">{tagline}</p>
+      <p class="footer__tagline">{brand.footerTagline}</p>
     </div>
 
     <div class="footer__col">
-      <h4 class="footer__heading">Quick Links</h4>
+      <h4 class="footer__heading">{footer.quickLinksHeading}</h4>
       <ul class="footer__list">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about/">About</a></li>
-        <li><a href="/team/">Our Team</a></li>
-        <li><a href="/blog/">Blog</a></li>
-        <li><a href="/contact/">Contact</a></li>
+        {footer.quickLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
       </ul>
     </div>
 
     <div class="footer__col">
-      <h4 class="footer__heading">Services</h4>
+      <h4 class="footer__heading">{footer.servicesHeading}</h4>
       <ul class="footer__list">
-        <li><a href="/services/#wealth-management">Wealth Management</a></li>
-        <li><a href="/services/#retirement-planning">Retirement Planning</a></li>
-        <li><a href="/services/#investment-management">Investment Management</a></li>
-        <li><a href="/services/#tax-planning">Tax Planning</a></li>
-        <li><a href="/services/#estate-planning">Estate Planning</a></li>
-        <li><a href="/services/#business-owners">Business Owner Services</a></li>
+        {footer.serviceLinks.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
       </ul>
     </div>
 
     <div class="footer__col">
-      <h4 class="footer__heading">Contact</h4>
+      <h4 class="footer__heading">{footer.contactHeading}</h4>
       <address class="footer__address">
-        <p>1240 Financial District Blvd<br />Suite 800<br />New York, NY 10005</p>
+        <p>{contact.addressLine1}<br />{contact.addressLine2}<br />{contact.addressLine3}</p>
         <p>
-          <a href="tel:+15552804400">(555) 280-4400</a><br />
-          <a href="mailto:hello@hargrovewealth.com">hello@hargrovewealth.com</a>
+          <a href={contact.phoneHref}>{contact.phone}</a><br />
+          <a href={contact.emailHref}>{contact.email}</a>
         </p>
-        <p class="footer__hours">Mon–Fri, 8:30am – 5:30pm EST</p>
+        <p class="footer__hours">{contact.hours}</p>
       </address>
     </div>
   </div>
 
   <div class="footer__bottom">
     <div class="container footer__bottom-inner">
-      <p>© {year} Hargrove Wealth Advisory · <a href="/privacy/">Privacy Policy</a></p>
-      <p class="footer__disclaimer">
-        This site is for informational purposes only and does not constitute financial advice.
-      </p>
+      <p>© {year} {footer.copyrightName} · <a href="/privacy/">Privacy Policy</a></p>
+      <p class="footer__disclaimer">{footer.disclaimer}</p>
     </div>
   </div>
 </footer>

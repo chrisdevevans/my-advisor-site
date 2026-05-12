@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "title": "About Us",
+    "description": "An independent, fee-only, fiduciary financial advisory firm. Founded in 2003 to give clients clarity, confidence, and a plan built around their life."
+  },
+  "hero": {
+    "eyebrow": "About Us",
+    "heading": "A different kind of advisory.",
+    "lede": "Independent, fee-only, fiduciary — and committed to the families and institutions we serve for the long term."
+  },
+  "story": {
+    "eyebrow": "Our Story",
+    "heading": "Twenty years of disciplined work.",
+    "paragraph1": "Hargrove Wealth Advisory was founded in 2003 by two partners who had spent the previous decade inside the largest names in finance and concluded the same thing: the brokerage model wasn't designed around the client. They built something different — independent, fee-only, and bound by the fiduciary standard. Twelve families took a chance on them in the first year.",
+    "paragraph2": "Twenty-plus years later, we serve more than 500 households and institutional clients across the country. We've intentionally stayed boutique. We turn down more business than we take. Our advisors carry small books because we believe the quality of advice depends on the time we spend with each client — and the time we spend with the math.",
+    "missionLabel": "Our mission:",
+    "missionText": "to empower clients with clarity, confidence, and a plan built around their life."
+  },
+  "values": {
+    "eyebrow": "Our Values",
+    "heading": "What we hold to.",
+    "items": [
+      {
+        "icon": "shield",
+        "title": "Fiduciary Duty",
+        "body": "We are legally obligated to act in your interest. Always. No exceptions."
+      },
+      {
+        "icon": "eye",
+        "title": "Transparency",
+        "body": "Our fees are clear, our methods are documented, and our reasoning is shared."
+      },
+      {
+        "icon": "compass",
+        "title": "Independence",
+        "body": "We are owner-operated and unaffiliated with any product manufacturer."
+      },
+      {
+        "icon": "tree",
+        "title": "Long-Term Thinking",
+        "body": "We measure success in decades, not quarters. Patience compounds."
+      }
+    ]
+  },
+  "timeline": {
+    "eyebrow": "Milestones",
+    "heading": "Twenty-plus years, deliberately built.",
+    "items": [
+      { "year": "2003", "text": "Founded by Robert Hargrove and a second partner with 12 founding clients." },
+      { "year": "2008", "text": "Navigated the financial crisis with disciplined rebalancing; no client took permanent losses on plan." },
+      { "year": "2015", "text": "Expanded service model to institutional and endowment clients." },
+      { "year": "2020", "text": "Launched digital planning tools for clients to view their full picture in one place." },
+      { "year": "2024", "text": "$2B in assets under management; 500+ households served." }
+    ]
+  },
+  "teamPreview": {
+    "eyebrow": "Leadership",
+    "heading": "A small, experienced team.",
+    "lede": "You'll know your advisor by name and they'll know your story. That's the model.",
+    "members": [
+      {
+        "name": "Robert Hargrove, CFP®, CFA",
+        "title": "Founding Partner",
+        "bio": "25 years of experience. Specializes in estate and retirement planning. Wharton MBA. Coaches youth soccer on weekends.",
+        "credentials": ["CFP®", "CFA"]
+      },
+      {
+        "name": "Sarah Whitfield, CFP®",
+        "title": "Partner, Wealth Management",
+        "bio": "18 years of experience. Focus on women in transition — divorce, widowhood, and inheritance. CFA Institute member.",
+        "credentials": ["CFP®", "CFA Member"]
+      },
+      {
+        "name": "David Kim, CPA, CFP®",
+        "title": "Director of Tax Strategy",
+        "bio": "12 years of experience. Former Big 4 tax consultant. Specializes in business owners and real estate investors.",
+        "credentials": ["CFP®", "CPA"]
+      }
+    ],
+    "linkLabel": "Meet the full team",
+    "linkHref": "/team/"
+  },
+  "cta": {
+    "heading": "Ready to take control of your financial future?",
+    "description": "A conversation costs nothing. Clarity is the first step toward confidence.",
+    "ctaLabel": "Book a Free Call",
+    "ctaHref": "/contact/"
+  }
+}

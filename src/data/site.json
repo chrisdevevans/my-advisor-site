@@ -1,0 +1,58 @@
+{
+  "brand": {
+    "title": "Hargrove Wealth",
+    "tag": "Advisory",
+    "footerTagline": "Independent. Fee-only. Fiduciary. Thoughtful wealth management for the long term."
+  },
+  "contact": {
+    "phone": "(555) 280-4400",
+    "phoneHref": "tel:+15552804400",
+    "email": "hello@hargrovewealth.com",
+    "emailHref": "mailto:hello@hargrovewealth.com",
+    "addressLine1": "1240 Financial District Blvd",
+    "addressLine2": "Suite 800",
+    "addressLine3": "New York, NY 10005",
+    "hours": "Mon–Fri, 8:30am – 5:30pm EST"
+  },
+  "nav": {
+    "links": [
+      { "href": "/", "label": "Home" },
+      { "href": "/about/", "label": "About" },
+      { "href": "/services/", "label": "Services" },
+      { "href": "/team/", "label": "Team" },
+      { "href": "/blog/", "label": "Blog" },
+      { "href": "/contact/", "label": "Contact" }
+    ],
+    "ctaLabel": "Book a Call",
+    "ctaHref": "/contact/"
+  },
+  "footer": {
+    "quickLinksHeading": "Quick Links",
+    "quickLinks": [
+      { "href": "/", "label": "Home" },
+      { "href": "/about/", "label": "About" },
+      { "href": "/team/", "label": "Our Team" },
+      { "href": "/blog/", "label": "Blog" },
+      { "href": "/contact/", "label": "Contact" }
+    ],
+    "servicesHeading": "Services",
+    "serviceLinks": [
+      { "href": "/services/#wealth-management", "label": "Wealth Management" },
+      { "href": "/services/#retirement-planning", "label": "Retirement Planning" },
+      { "href": "/services/#investment-management", "label": "Investment Management" },
+      { "href": "/services/#tax-planning", "label": "Tax Planning" },
+      { "href": "/services/#estate-planning", "label": "Estate Planning" },
+      { "href": "/services/#business-owners", "label": "Business Owner Services" }
+    ],
+    "contactHeading": "Contact",
+    "copyrightName": "Hargrove Wealth Advisory",
+    "disclaimer": "This site is for informational purposes only and does not constitute financial advice."
+  },
+  "seo": {
+    "siteUrl": "https://hargrovewealth.com",
+    "siteName": "Hargrove Wealth Advisory",
+    "defaultTitle": "Hargrove Wealth Advisory — Bespoke Wealth Management",
+    "defaultDescription": "Independent, fee-only fiduciary financial advisors helping individuals, families, and institutions build long-term prosperity.",
+    "defaultImage": "/og-image.jpg"
+  }
+}

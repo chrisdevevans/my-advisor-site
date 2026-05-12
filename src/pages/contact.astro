@@ -1,50 +1,49 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ContactForm from "@components/ContactForm.astro";
+import site from "@data/site.json";
+import page from "@data/pages/contact.json";
+
+const { meta, hero, info, form, calendly } = page;
+const { contact } = site;
 ---
 
-<BaseLayout
-  title="Contact"
-  description="Schedule a free, no-obligation conversation with the team at Hargrove Wealth Advisory. Call (555) 280-4400 or send a message."
->
+<BaseLayout title={meta.title} description={meta.description}>
   <section class="page-hero">
     <div class="container fade-up">
-      <span class="eyebrow">Contact</span>
-      <h1>Let's Talk.</h1>
+      <span class="eyebrow">{hero.eyebrow}</span>
+      <h1>{hero.heading}</h1>
       <hr class="gold-rule" />
-      <p class="lede">Your first conversation is always free and without obligation.</p>
+      <p class="lede">{hero.lede}</p>
     </div>
   </section>
 
   <section class="section">
     <div class="container contact-grid">
       <div class="contact-info fade-up">
-        <h2>Get in touch</h2>
-        <p class="contact-info__lede">
-          We're a small team and we answer our own phones. The fastest way to reach us is to call
-          during business hours; otherwise email or the form on the right both work well.
-        </p>
+        <h2>{info.heading}</h2>
+        <p class="contact-info__lede">{info.lede}</p>
 
         <ul class="contact-info__list">
           <li>
-            <span class="contact-info__label">Phone</span>
-            <a href="tel:+15552804400">(555) 280-4400</a>
+            <span class="contact-info__label">{info.labels.phone}</span>
+            <a href={contact.phoneHref}>{contact.phone}</a>
           </li>
           <li>
-            <span class="contact-info__label">Email</span>
-            <a href="mailto:hello@hargrovewealth.com">hello@hargrovewealth.com</a>
+            <span class="contact-info__label">{info.labels.email}</span>
+            <a href={contact.emailHref}>{contact.email}</a>
           </li>
           <li>
-            <span class="contact-info__label">Office</span>
+            <span class="contact-info__label">{info.labels.office}</span>
             <address>
-              1240 Financial District Blvd<br />
-              Suite 800<br />
-              New York, NY 10005
+              {contact.addressLine1}<br />
+              {contact.addressLine2}<br />
+              {contact.addressLine3}
             </address>
           </li>
           <li>
-            <span class="contact-info__label">Hours</span>
-            <span>Mon–Fri, 8:30am – 5:30pm EST</span>
+            <span class="contact-info__label">{info.labels.hours}</span>
+            <span>{contact.hours}</span>
           </li>
         </ul>
 
@@ -56,19 +55,23 @@ import ContactForm from "@components/ContactForm.astro";
                 fill="currentColor"
               />
             </svg>
-            <span class="map__label">Visit Us — Financial District, NYC</span>
+            <span class="map__label">{info.mapLabel}</span>
           </div>
         </div>
       </div>
 
       <div class="contact-form-wrap fade-up">
         <h2 class="sr-only">Send a message</h2>
-        <ContactForm />
+        <ContactForm
+          submitLabel={form.submitLabel}
+          responseNote={form.responseNote}
+          successMessage={form.successMessage}
+        />
 
         <div class="calendly">
-          <p>Prefer to book directly?</p>
-          <a href="#" class="btn btn--ghost calendly__btn">
-            Schedule on Calendly
+          <p>{calendly.prompt}</p>
+          <a href={calendly.buttonHref} class="btn btn--ghost calendly__btn">
+            {calendly.buttonLabel}
             <span aria-hidden="true">→</span>
           </a>
         </div>
