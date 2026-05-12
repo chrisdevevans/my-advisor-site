@@ -6,6 +6,7 @@ author: Hargrove Wealth
 excerpt: >-
   A short summary of this post — appears on the blog index card and in social
   previews.
+image: /uploads/blog/a5e81d6c-994b-4ce6-a1f8-d61b00b06205.jpg
 tags:
   - Wealth Management
   - Tax Planning
