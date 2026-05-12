@@ -8,6 +8,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- **Images on blog posts** — when a post's frontmatter has an `image` field, it now renders as a 16:9 cover hero at the top of the post page, as the thumbnail on the blog-index card, and as the OG/Twitter preview image. Posts without an image fall back to a subtle gold-monogram placeholder on cards.
+- **Inline images in post body** — Markdown `![alt](/uploads/blog/foo.jpg)` is now styled (border, rounded corners, full-width, lazy-loaded). The CloudCannon content editor now has an Insert Image button enabled with uploads pointing at `public/uploads/blog/`, plus support for `<figcaption>` styling.
+- **`public/uploads/blog/`** directory committed (via `.gitkeep`) so the upload path exists immediately on first use.
+
 - **Fully data-driven pages** — every marketing page (Home, About, Services, Team, Contact, Privacy) is now powered by a JSON data file in `src/data/pages/`. The `.astro` page templates are thin shells that render the data, so all copy, lists, stats, testimonials, team members, services, process steps, fee tiers, and privacy sections can be edited without touching code.
 - **Global `src/data/site.json`** — brand wordmark, full contact block (phone, email, address, hours), top nav links + CTA, footer links and disclaimer, and SEO defaults. The Navbar, Footer, and `BaseLayout` now read from this file, so updates propagate site-wide.
 - CloudCannon **"Pages"** collection — surfaces all of `src/data/pages/*.json` with structured `_inputs` for each section, per-file preview URLs (so Visual Editor opens the right route), and file-locked controls (no accidental add/delete of page data).
