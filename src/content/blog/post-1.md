@@ -1,11 +1,17 @@
 ---
-title: "The 5 Financial Mistakes High Earners Make in Their 40s"
-date: 2024-11-15
-author: "Robert Hargrove"
-excerpt: "Earning more doesn't automatically mean keeping more. Here are the patterns we see repeatedly — and how to course-correct."
-tags: ["Wealth Management", "Planning"]
+_schema: default
+title: The 5 Financial Mistakes High Earners Make in Their 40s
+date: 2024-11-16T00:00:00Z
+author: Robert Hargrove
+excerpt: >-
+  Earning more doesn't automatically mean keeping more. Here are the patterns we
+  see repeatedly — and how to course-correct.
+tags:
+  - Wealth Management
+  - Planning
+  - Retirement
+  - Business
 ---
-
 By the time most professionals reach their 40s, income has accelerated, responsibilities have multiplied, and a comfortable lifestyle feels permanent. It often isn't. After two decades of working with high earners, we see the same five mistakes repeatedly. They rarely look like mistakes in the moment — they feel like success.
 
 ## 1. Confusing income with wealth
