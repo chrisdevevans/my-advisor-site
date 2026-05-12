@@ -1,0 +1,70 @@
+# CloudCannon configuration — Hargrove Wealth Advisory
+# https://cloudcannon.com/documentation/articles/configure-cloudcannon/
+
+source: ""
+include:
+  - .cloudcannon
+  - public
+
+paths:
+  uploads: public/uploads
+  static: public
+
+collections_config:
+  blog:
+    path: src/content/blog
+    output: true
+    url: /blog/{slug}/
+    icon: article
+    _enabled_editors:
+      - visual
+      - content
+    _editables:
+      content:
+        format: markdown
+        bold: true
+        italic: true
+        link: true
+        bulletedlist: true
+        numberedlist: true
+        blockquote: true
+        heading2: true
+        heading3: true
+    _inputs:
+      title:
+        type: text
+        comment: The post title — also used as the page <h1>.
+      date:
+        type: date
+      author:
+        type: text
+        comment: Full name of the post author.
+      excerpt:
+        type: textarea
+        options:
+          rows: 3
+        comment: A short summary shown on the blog index and in OG previews.
+      tags:
+        type: multiselect
+        options:
+          values:
+            - Wealth Management
+            - Retirement
+            - Tax Planning
+            - Investment
+            - Planning
+            - Business
+      image:
+        type: image
+        comment: Optional hero image for the post.
+
+collection_groups:
+  - heading: Content
+    collections:
+      - blog
+
+_inputs:
+  title:
+    type: text
+  description:
+    type: textarea

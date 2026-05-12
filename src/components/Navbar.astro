@@ -1,0 +1,333 @@
+---
+export interface NavLink {
+  href: string;
+  label: string;
+}
+
+export interface Props {
+  logoTitle?: string;
+  logoTag?: string;
+  links?: NavLink[];
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const {
+  logoTitle = "Hargrove Wealth",
+  logoTag = "Advisory",
+  links = [
+    { href: "/", label: "Home" },
+    { href: "/about/", label: "About" },
+    { href: "/services/", label: "Services" },
+    { href: "/team/", label: "Team" },
+    { href: "/blog/", label: "Blog" },
+    { href: "/contact/", label: "Contact" },
+  ],
+  ctaLabel = "Book a Call",
+  ctaHref = "/contact/",
+} = Astro.props;
+
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isActive = (href: string) => {
+  const target = href.replace(/\/$/, "") || "/";
+  if (target === "/") return currentPath === "/";
+  return currentPath === target || currentPath.startsWith(target + "/");
+};
+---
+
+<header class="nav" id="site-nav" data-nav>
+  <div class="nav__inner container">
+    <a href="/" class="nav__logo" aria-label={`${logoTitle} ${logoTag} — home`}>
+      <span class="nav__logo-title">{logoTitle}</span>
+      <span class="nav__logo-tag">{logoTag}</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      <ul>
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class:list={["nav__link", { "is-active": isActive(link.href) }]}
+                aria-current={isActive(link.href) ? "page" : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="nav__actions">
+      <a href={ctaHref} class="btn btn--primary btn--sm nav__cta">{ctaLabel}</a>
+      <button
+        type="button"
+        class="nav__toggle"
+        aria-label="Toggle menu"
+        aria-controls="mobile-drawer"
+        aria-expanded="false"
+        data-nav-toggle
+      >
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+        <span class="nav__toggle-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="drawer" id="mobile-drawer" data-nav-drawer aria-hidden="true">
+    <nav aria-label="Mobile">
+      <ul class="drawer__list">
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class:list={["drawer__link", { "is-active": isActive(link.href) }]}
+                aria-current={isActive(link.href) ? "page" : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+        <li>
+          <a href={ctaHref} class="btn btn--primary drawer__cta">{ctaLabel}</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const nav = document.querySelector<HTMLElement>("[data-nav]");
+  const toggle = document.querySelector<HTMLButtonElement>("[data-nav-toggle]");
+  const drawer = document.querySelector<HTMLElement>("[data-nav-drawer]");
+
+  if (nav) {
+    const onScroll = () => {
+      if (window.scrollY > 12) nav.classList.add("is-scrolled");
+      else nav.classList.remove("is-scrolled");
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
+  if (toggle && drawer) {
+    const closeDrawer = () => {
+      toggle.setAttribute("aria-expanded", "false");
+      drawer.setAttribute("aria-hidden", "true");
+      drawer.classList.remove("is-open");
+      document.body.classList.remove("nav-open");
+    };
+    const openDrawer = () => {
+      toggle.setAttribute("aria-expanded", "true");
+      drawer.setAttribute("aria-hidden", "false");
+      drawer.classList.add("is-open");
+      document.body.classList.add("nav-open");
+    };
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      if (expanded) closeDrawer();
+      else openDrawer();
+    });
+    drawer.querySelectorAll("a").forEach((a) => a.addEventListener("click", closeDrawer));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeDrawer();
+    });
+  }
+</script>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: color-mix(in srgb, var(--color-bg) 80%, transparent);
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color var(--t-base) var(--ease),
+      background-color var(--t-base) var(--ease);
+  }
+
+  .nav.is-scrolled {
+    background-color: color-mix(in srgb, var(--color-bg) 92%, transparent);
+    border-bottom-color: var(--color-border);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-5);
+    padding-block: var(--space-4);
+  }
+
+  .nav__logo {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .nav__logo-title {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1;
+  }
+
+  .nav__logo-tag {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  .nav__links {
+    display: none;
+  }
+
+  @media (min-width: 960px) {
+    .nav__links {
+      display: block;
+    }
+    .nav__links ul {
+      display: flex;
+      gap: var(--space-6);
+      align-items: center;
+    }
+  }
+
+  .nav__link {
+    position: relative;
+    display: inline-block;
+    padding: 0.25rem 0;
+    font-size: var(--fs-sm);
+    letter-spacing: 0.04em;
+    color: var(--color-text);
+    transition: color var(--t-base) var(--ease);
+  }
+
+  .nav__link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--t-base) var(--ease);
+  }
+
+  .nav__link:hover,
+  .nav__link.is-active {
+    color: var(--color-gold-light);
+  }
+
+  .nav__link:hover::after,
+  .nav__link.is-active::after {
+    transform: scaleX(1);
+  }
+
+  .nav__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .nav__cta {
+    display: none;
+  }
+
+  @media (min-width: 720px) {
+    .nav__cta {
+      display: inline-flex;
+    }
+  }
+
+  .nav__toggle {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+
+  @media (min-width: 960px) {
+    .nav__toggle {
+      display: none;
+    }
+  }
+
+  .nav__toggle-bar {
+    width: 22px;
+    height: 1.5px;
+    background: var(--color-text);
+    transition: transform var(--t-base) var(--ease);
+  }
+
+  /* Drawer */
+  .drawer {
+    position: fixed;
+    inset: 64px 0 0 auto;
+    width: min(360px, 92vw);
+    background-color: var(--color-surface);
+    border-left: 1px solid var(--color-border);
+    transform: translateX(100%);
+    transition: transform var(--t-base) var(--ease);
+    overflow-y: auto;
+    max-height: calc(100dvh - 64px);
+  }
+
+  .drawer.is-open {
+    transform: translateX(0);
+  }
+
+  @media (min-width: 960px) {
+    .drawer {
+      display: none;
+    }
+  }
+
+  .drawer__list {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-5);
+    gap: var(--space-2);
+  }
+
+  .drawer__link {
+    display: block;
+    padding: var(--space-4) var(--space-2);
+    font-size: var(--fs-md);
+    font-family: var(--font-display);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+    transition: color var(--t-base) var(--ease);
+  }
+
+  .drawer__link:hover,
+  .drawer__link.is-active {
+    color: var(--color-gold-light);
+  }
+
+  .drawer__cta {
+    margin-top: var(--space-5);
+    justify-content: center;
+  }
+
+  :global(body.nav-open) {
+    overflow: hidden;
+  }
+</style>

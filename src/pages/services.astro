@@ -1,0 +1,327 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ServiceCard from "@components/ServiceCard.astro";
+import CTABanner from "@components/CTABanner.astro";
+
+const services = [
+  {
+    id: "wealth-management",
+    icon: "chart" as const,
+    title: "Wealth Management",
+    description:
+      "Your full financial picture, coordinated. Budgeting and cash flow, tax optimization, investment management, insurance review, and estate coordination — under one roof, with one team.",
+    audience: "High-net-worth individuals and families.",
+  },
+  {
+    id: "retirement-planning",
+    icon: "compass" as const,
+    title: "Retirement Planning",
+    description:
+      "401(k) rollovers, Social Security claiming strategy, withdrawal sequencing, and income mapping. We model 30+ year scenarios so you can see what your decisions actually mean.",
+    audience: "Anyone within 10 years of retirement — or already there.",
+  },
+  {
+    id: "investment-management",
+    icon: "shield" as const,
+    title: "Investment Management",
+    description:
+      "Diversified, evidence-based portfolios built to your risk profile. No commissions, no proprietary products, no chasing fads. Quarterly reviews and tax-aware rebalancing.",
+    audience: "Clients who want disciplined long-term investing without the noise.",
+  },
+  {
+    id: "tax-planning",
+    icon: "scales" as const,
+    title: "Tax Planning",
+    description:
+      "Year-round tax-loss harvesting, Roth conversion analysis, asset location, charitable giving strategy, and entity structuring advice — coordinated with your CPA, not duplicating their work.",
+    audience: "High earners and retirees with complex tax pictures.",
+  },
+  {
+    id: "estate-planning",
+    icon: "tree" as const,
+    title: "Estate Planning Coordination",
+    description:
+      "We work alongside your attorney to align your financial plan with your legacy goals: trusts, beneficiary reviews, gifting strategies, and generational wealth transfer.",
+    audience: "Families with estates above $1M, blended families, or business owners.",
+  },
+  {
+    id: "business-owners",
+    icon: "briefcase" as const,
+    title: "Business Owner Services",
+    description:
+      "Exit planning, business valuation prep, key-person insurance analysis, succession strategy, and post-sale wealth planning. We've helped founders sell — and stay sane.",
+    audience: "Business owners 5–10 years from exit or actively in transition.",
+  },
+];
+
+const processSteps = [
+  {
+    n: "01",
+    title: "Discovery Call",
+    body: "A 30-minute, no-cost conversation. We learn about you. You learn how we work. No pressure, no obligation.",
+  },
+  {
+    n: "02",
+    title: "Financial Review & Proposal",
+    body: "We analyze your full picture — investments, taxes, goals — and present a written plan with our recommendation.",
+  },
+  {
+    n: "03",
+    title: "Plan Implementation",
+    body: "We execute the agreed-upon plan: account transitions, portfolio restructuring, tax moves, document coordination.",
+  },
+  {
+    n: "04",
+    title: "Ongoing Partnership",
+    body: "Quarterly reviews, annual deep-dives, and on-call access whenever life changes. The plan evolves with you.",
+  },
+];
+
+const feeTiers = [
+  { range: "Up to $1M", rate: "1.00%" },
+  { range: "$1M – $3M", rate: "0.85%" },
+  { range: "$3M and above", rate: "0.70%" },
+];
+---
+
+<BaseLayout
+  title="Services"
+  description="Comprehensive financial planning services: wealth management, retirement planning, investment management, tax planning, estate coordination, and business owner services."
+>
+  <section class="page-hero">
+    <div class="container fade-up">
+      <span class="eyebrow">Services</span>
+      <h1>What We Do.</h1>
+      <hr class="gold-rule" />
+      <p class="lede">
+        Six interconnected services designed to work together. We don't sell products. We sell
+        thinking, judgment, and accountability.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="services">
+    <div class="container">
+      <h2 id="services" class="sr-only">Our Services</h2>
+      <div class="services-grid">
+        {
+          services.map((s) => (
+            <ServiceCard
+              id={s.id}
+              icon={s.icon}
+              title={s.title}
+              description={s.description}
+              audience={s.audience}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface" aria-labelledby="process">
+    <div class="container">
+      <header class="section-head fade-up">
+        <span class="eyebrow">How We Work</span>
+        <h2 id="process">A four-step process.</h2>
+        <p class="lede">Straightforward, paced to your timeline, never rushed.</p>
+      </header>
+
+      <ol class="process">
+        {
+          processSteps.map((step) => (
+            <li class="process__step fade-up">
+              <span class="process__num">{step.n}</span>
+              <h3 class="process__title">{step.title}</h3>
+              <p class="process__body">{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="fees">
+    <div class="container container--narrow">
+      <header class="section-head fade-up">
+        <span class="eyebrow">Fee Structure</span>
+        <h2 id="fees">Transparent, fee-only. No commissions.</h2>
+        <p class="lede">
+          We are a fee-only fiduciary firm. We never earn commissions from any product or platform.
+          Our only compensation comes from our clients — which is the only conflict of interest
+          we're willing to have.
+        </p>
+      </header>
+
+      <div class="fee-table fade-up">
+        <div class="fee-table__head">
+          <span>Assets Under Management</span>
+          <span>Annual Fee</span>
+        </div>
+        {
+          feeTiers.map((tier) => (
+            <div class="fee-table__row">
+              <span>{tier.range}</span>
+              <span class="fee-table__rate">{tier.rate}</span>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="fee-note fade-up">
+        Financial plans are also available as flat-fee engagements for clients who don't need
+        ongoing investment management. Pricing depends on complexity and is quoted in writing
+        before any engagement.
+      </p>
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-9) var(--space-7);
+    background:
+      radial-gradient(ellipse 40% 60% at 90% 0%, rgba(201, 168, 76, 0.07), transparent 70%),
+      var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-hero .lede {
+    margin-top: var(--space-4);
+  }
+
+  .section-head {
+    max-width: 720px;
+    margin-bottom: var(--space-7);
+  }
+
+  .section-head h2 {
+    margin-bottom: var(--space-4);
+  }
+
+  .section--surface {
+    background-color: var(--color-surface);
+    border-block: 1px solid var(--color-border);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 768px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6);
+    }
+  }
+
+  /* Process stepper */
+  .process {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    counter-reset: step;
+  }
+
+  @media (min-width: 720px) {
+    .process {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .process {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+    }
+  }
+
+  .process__step {
+    position: relative;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-6) var(--space-5);
+    transition: border-color var(--t-base) var(--ease);
+  }
+
+  .process__step:hover {
+    border-color: var(--color-border-strong);
+  }
+
+  .process__num {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: var(--fs-3xl);
+    color: var(--color-gold);
+    margin-bottom: var(--space-3);
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .process__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-lg);
+    margin-bottom: var(--space-3);
+    font-weight: 500;
+  }
+
+  .process__body {
+    color: var(--color-muted);
+    line-height: 1.65;
+    font-size: var(--fs-sm);
+  }
+
+  /* Fee table */
+  .fee-table {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-block: var(--space-6);
+  }
+
+  .fee-table__head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    background-color: var(--color-surface-2);
+    border-bottom: 1px solid var(--color-border);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    font-weight: 500;
+  }
+
+  .fee-table__row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .fee-table__row:last-child {
+    border-bottom: 0;
+  }
+
+  .fee-table__rate {
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    color: var(--color-gold);
+    font-weight: 500;
+  }
+
+  .fee-note {
+    color: var(--color-muted);
+    font-size: var(--fs-sm);
+    line-height: 1.7;
+    border-left: 2px solid var(--color-gold);
+    padding-left: var(--space-4);
+  }
+</style>

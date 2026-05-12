@@ -1,0 +1,147 @@
+---
+export interface Props {
+  name: string;
+  title: string;
+  bio: string;
+  credentials?: string[];
+  linkedin?: string;
+  initials?: string;
+}
+
+const { name, title, bio, credentials = [], linkedin, initials } = Astro.props;
+
+const computedInitials =
+  initials ??
+  name
+    .split(/\s+/)
+    .map((w) => w.replace(/[^A-Za-z]/g, "")[0])
+    .filter(Boolean)
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+---
+
+<article class="team-card card fade-up">
+  <div class="team-card__avatar" aria-hidden="true">
+    <span>{computedInitials}</span>
+  </div>
+  <h3 class="team-card__name">{name}</h3>
+  <p class="team-card__title">{title}</p>
+  <p class="team-card__bio">{bio}</p>
+
+  {
+    credentials.length > 0 && (
+      <ul class="team-card__creds" aria-label="Credentials">
+        {credentials.map((c) => (
+          <li>{c}</li>
+        ))}
+      </ul>
+    )
+  }
+
+  {
+    linkedin && (
+      <a
+        href={linkedin}
+        class="team-card__linkedin"
+        aria-label={`${name} on LinkedIn`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M19 0H5a5 5 0 00-5 5v14a5 5 0 005 5h14a5 5 0 005-5V5a5 5 0 00-5-5zM8 19H5V8h3v11zM6.5 6.7a1.8 1.8 0 110-3.5 1.8 1.8 0 010 3.5zM20 19h-3v-5.6c0-3.4-4-3.1-4 0V19h-3V8h3v1.8c1.4-2.6 7-2.8 7 2.5V19z" />
+        </svg>
+        <span>LinkedIn</span>
+      </a>
+    )
+  }
+</article>
+
+<style>
+  .team-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    text-align: left;
+    height: 100%;
+  }
+
+  .team-card__avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+    color: var(--color-bg);
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 12px rgba(201, 168, 76, 0.25);
+    margin-bottom: var(--space-2);
+  }
+
+  .team-card__name {
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .team-card__title {
+    font-size: var(--fs-xs);
+    color: var(--color-gold);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .team-card__bio {
+    color: var(--color-muted);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  .team-card__creds {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+    width: 100%;
+  }
+
+  .team-card__creds li {
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.625rem;
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    color: var(--color-gold-light);
+    border-radius: var(--radius-pill);
+  }
+
+  .team-card__linkedin {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-muted);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color var(--t-base) var(--ease);
+  }
+
+  .team-card__linkedin svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .team-card__linkedin:hover {
+    color: var(--color-gold);
+  }
+</style>

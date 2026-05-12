@@ -1,0 +1,90 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import BlogCard from "@components/BlogCard.astro";
+import CTABanner from "@components/CTABanner.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+
+<BaseLayout
+  title="Insights & Articles"
+  description="Thoughtful perspectives on wealth management, retirement planning, tax strategy, and investment philosophy from the advisors at Hargrove Wealth Advisory."
+>
+  <section class="page-hero">
+    <div class="container fade-up">
+      <span class="eyebrow">Insights</span>
+      <h1>Notes on Wealth.</h1>
+      <hr class="gold-rule" />
+      <p class="lede">
+        Considered writing from our advisors on the topics that shape our work — planning,
+        markets, taxes, and the long view.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {
+        posts.length === 0 ? (
+          <p class="text-muted">No posts yet. Check back soon.</p>
+        ) : (
+          <div class="blog-grid">
+            {posts.map((post) => (
+              <BlogCard
+                title={post.data.title}
+                href={`/blog/${post.id}/`}
+                date={post.data.date}
+                author={post.data.author}
+                excerpt={post.data.excerpt}
+                tags={post.data.tags}
+              />
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <CTABanner
+    heading="Have a question we should write about?"
+    description="Send us a topic. If it's useful for one client, it's usually useful for many."
+    ctaLabel="Suggest a Topic"
+    ctaHref="/contact/"
+  />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-9) var(--space-7);
+    background:
+      radial-gradient(ellipse 40% 60% at 90% 0%, rgba(201, 168, 76, 0.07), transparent 70%),
+      var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-hero .lede {
+    margin-top: var(--space-4);
+  }
+
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 768px) {
+    .blog-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .blog-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+  }
+</style>

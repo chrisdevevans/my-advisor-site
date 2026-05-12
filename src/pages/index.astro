@@ -1,0 +1,248 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import HeroSection from "@components/HeroSection.astro";
+import ServiceCard from "@components/ServiceCard.astro";
+import TestimonialCard from "@components/TestimonialCard.astro";
+import CTABanner from "@components/CTABanner.astro";
+
+const heroData = {
+  headline: "Your Wealth. Thoughtfully Managed.",
+  subheadline:
+    "Bespoke financial planning for individuals, families, and institutions seeking long-term prosperity.",
+};
+
+const stats = [
+  { value: "2003", label: "Founded" },
+  { value: "98%", label: "Client Retention" },
+  { value: "Fiduciary", label: "Standard" },
+  { value: "Fee-Only", label: "Model" },
+];
+
+const services = [
+  {
+    icon: "chart" as const,
+    title: "Wealth Management",
+    description:
+      "Comprehensive planning that ties together investments, taxes, and your full financial picture.",
+    href: "/services/#wealth-management",
+  },
+  {
+    icon: "compass" as const,
+    title: "Retirement Planning",
+    description:
+      "Income mapping, Social Security strategy, and withdrawal plans built for 30+ year horizons.",
+    href: "/services/#retirement-planning",
+  },
+  {
+    icon: "shield" as const,
+    title: "Investment Strategy",
+    description:
+      "Evidence-based portfolios, risk-aligned allocation, and disciplined quarterly review.",
+    href: "/services/#investment-management",
+  },
+];
+
+const testimonials = [
+  {
+    quote:
+      "After 30 years building my career, I needed someone who would think about my finances the way I thought about my company. Hargrove gave me that — clarity, discipline, and a real plan.",
+    name: "Margaret H.",
+    role: "Retired Executive",
+  },
+  {
+    quote:
+      "We came in with a complicated picture — two businesses, real estate, kids in college. They untangled it without judgment and built something that finally feels coordinated.",
+    name: "James & Priya Okafor",
+    role: "Business Owners",
+  },
+  {
+    quote:
+      "I don't have time to manage this stuff and I shouldn't be the one doing it. They handle the heavy lifting and bring me into the decisions that actually matter.",
+    name: "David Chen",
+    role: "Surgeon",
+  },
+];
+---
+
+<BaseLayout
+  title="Hargrove Wealth Advisory — Bespoke Wealth Management"
+  description="Independent, fee-only fiduciary financial advisors. Thoughtful wealth management for individuals, families, and institutions building long-term prosperity."
+>
+  <!-- _editables: hero -->
+  <HeroSection
+    headline={heroData.headline}
+    subheadline={heroData.subheadline}
+  />
+
+  <!-- Services preview -->
+  <section class="section" aria-labelledby="services-preview">
+    <div class="container">
+      <header class="section-head fade-up">
+        <span class="eyebrow">What We Do</span>
+        <h2 id="services-preview">Built around your life, not the market.</h2>
+        <p class="lede">
+          Three pillars of financial planning — designed to work together, not in isolation.
+        </p>
+      </header>
+
+      <div class="services-grid">
+        {
+          services.map((s) => (
+            <ServiceCard
+              icon={s.icon}
+              title={s.title}
+              description={s.description}
+              href={s.href}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- About teaser -->
+  <section class="about-teaser section" aria-labelledby="about-teaser">
+    <div class="container about-teaser__grid">
+      <div class="about-teaser__copy fade-up">
+        <span class="eyebrow">About the Firm</span>
+        <h2 id="about-teaser">A firm built on independence and discipline.</h2>
+        <hr class="gold-rule" />
+        <p class="lede">
+          We are independent, fee-only, and held to the fiduciary standard. We don't sell products.
+          We don't earn commissions. We're paid by our clients to do one thing: act in their interest.
+        </p>
+        <p class="text-muted">
+          For more than twenty years we've helped families navigate the inflection points of their
+          financial lives — career transitions, business sales, retirement, inheritance — with the
+          same patient, evidence-based approach.
+        </p>
+        <a href="/about/" class="btn--link">More about us</a>
+      </div>
+
+      <ul class="stats fade-up">
+        <!-- _editables: stats -->
+        {
+          stats.map((s) => (
+            <li class="stats__item">
+              <span class="stats__value">{s.value}</span>
+              <span class="stats__label">{s.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section section--testimonials" aria-labelledby="testimonials">
+    <div class="container">
+      <header class="section-head text-center fade-up">
+        <span class="eyebrow">Client Stories</span>
+        <h2 id="testimonials">What our clients say.</h2>
+        <hr class="gold-rule gold-rule--center" />
+      </header>
+
+      <div class="testimonials-grid">
+        {
+          testimonials.map((t) => (
+            <TestimonialCard quote={t.quote} name={t.name} role={t.role} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>
+
+<style>
+  .section-head {
+    max-width: 720px;
+    margin-bottom: var(--space-7);
+  }
+
+  .section-head.text-center {
+    margin-inline: auto;
+  }
+
+  .section-head h2 {
+    margin-bottom: var(--space-4);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 720px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .about-teaser {
+    background-color: var(--color-surface);
+    border-block: 1px solid var(--color-border);
+  }
+
+  .about-teaser__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    align-items: center;
+  }
+
+  @media (min-width: 960px) {
+    .about-teaser__grid {
+      grid-template-columns: 1.2fr 1fr;
+      gap: var(--space-9);
+    }
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background-color: var(--color-border);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .stats__item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-6);
+    background-color: var(--color-bg);
+    text-align: center;
+  }
+
+  .stats__value {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    color: var(--color-gold);
+    font-weight: 500;
+    line-height: 1.1;
+  }
+
+  .stats__label {
+    font-size: var(--fs-xs);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

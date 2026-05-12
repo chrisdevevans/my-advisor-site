@@ -7,15 +7,12 @@ import { fileURLToPath } from "node:url";
 
 import mdx from "@astrojs/mdx";
 
-import { siteFonts } from "./site-fonts.mjs";
-import tailwindcss from "@tailwindcss/vite";
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://example.com", // TODO: Update to your production URL
-  fonts: siteFonts,
+  site: "https://hargrovewealth.com",
+  output: "static",
   build: {
     inlineStylesheets: "always",
   },
@@ -29,32 +26,6 @@ export default defineConfig({
     domains: [],
   },
   integrations: [
-    {
-      name: "builder-preview-dev-only",
-      hooks: {
-        "astro:config:setup": ({ command, injectRoute, updateConfig }) => {
-          if (command === "dev") {
-            injectRoute({
-              pattern: "/component-docs/builder-preview",
-              entrypoint: "./src/component-docs/pages/builder-preview.astro",
-              prerender: false,
-            });
-            updateConfig({
-              adapter: {
-                name: "dev-only-server-preview",
-                serverEntrypoint: "",
-                supportedAstroFeatures: {
-                  serverOutput: "stable",
-                  staticOutput: "stable",
-                  hybridOutput: "stable",
-                  sharpImageService: "stable",
-                },
-              },
-            });
-          }
-        },
-      },
-    },
     editableRegions(),
     icon({
       iconDir: path.resolve(__dirname, "src/icons"),
@@ -76,9 +47,6 @@ export default defineConfig({
         if (page.endsWith("/404") || page.endsWith("/404.html")) {
           return false;
         }
-        if (page.includes("/component-docs")) {
-          return false;
-        }
         return true;
       },
     }),
@@ -87,43 +55,6 @@ export default defineConfig({
   vite: {
     build: {
       minify: "esbuild",
-    },
-    plugins: [
-      tailwindcss(),
-      {
-        name: "suppress-node-externalized-warning",
-        config() {
-          return {
-            build: {
-              rollupOptions: {
-                onwarn(warning, defaultHandler) {
-                  if (
-                    warning.message?.includes("externalized for browser compatibility") &&
-                    warning.message?.includes("discoverVideoSources")
-                  )
-                    return;
-                  defaultHandler(warning);
-                },
-              },
-            },
-          };
-        },
-        configResolved(config) {
-          const originalWarn = config.logger.warn;
-
-          config.logger.warn = (msg, options) => {
-            if (
-              typeof msg === "string" &&
-              msg.includes("externalized for browser compatibility") &&
-              msg.includes("discoverVideoSources")
-            )
-              return;
-            originalWarn(msg, options);
-          };
-        },
-      },
-    ],
-    build: {
       chunkSizeWarningLimit: 1024,
     },
     css: {
@@ -132,21 +63,9 @@ export default defineConfig({
     resolve: {
       alias: {
         "@components": path.resolve(__dirname, "src/components"),
-        "@building-blocks": path.resolve(__dirname, "src/components/building-blocks"),
-        "@core-elements": path.resolve(__dirname, "src/components/building-blocks/core-elements"),
-        "@forms": path.resolve(__dirname, "src/components/building-blocks/forms"),
-        "@wrappers": path.resolve(__dirname, "src/components/building-blocks/wrappers"),
-        "@navigation": path.resolve(__dirname, "src/components/navigation"),
-        "@page-sections": path.resolve(__dirname, "src/components/page-sections"),
-        "@features": path.resolve(__dirname, "src/components/page-sections/features"),
-        "@builders": path.resolve(__dirname, "src/components/page-sections/builders"),
-        "@data": path.resolve(__dirname, "src/data"),
-        "@content": path.resolve(__dirname, "src/content"),
-        "@assets": path.resolve(__dirname, "src/assets"),
-        "@component-docs": path.resolve(__dirname, "src/component-docs"),
         "@layouts": path.resolve(__dirname, "src/layouts"),
-        "@component-utils": path.resolve(__dirname, "src/components/utils"),
         "@styles": path.resolve(__dirname, "src/styles"),
+        "@content": path.resolve(__dirname, "src/content"),
       },
     },
   },

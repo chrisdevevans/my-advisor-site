@@ -10,7 +10,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- Switched the site identity from the generic component-library starter to the **Hargrove Wealth Advisory** financial-services site, with new design tokens (luxury dark + gold palette) and Playfair Display / DM Sans typography in `src/styles/global.css`.
+- Replaced the catch-all `[...slug].astro` page and the legacy `pages` content collection with explicit per-route pages (`about`, `services`, `team`, `contact`, `privacy`) for clearer routing and easier maintenance.
+- Simplified `astro.config.mjs` (set `site` to `https://hargrovewealth.com`, set `output: "static"`, removed component-library injection and tailwind plugin) and trimmed the content collection schema in `src/content.config.ts` to a single `blog` collection.
+
 ### Added
+
+- Full marketing site: Home, About, Services, Team, Blog index, Blog post, Contact, Privacy, and 404 pages — all built on a shared `BaseLayout` with per-page SEO/OG meta.
+- Reusable site components: `Navbar`, `Footer`, `HeroSection`, `ServiceCard`, `TeamCard`, `TestimonialCard`, `CTABanner`, `ContactForm`, `BlogCard`, and `FAQAccordion`.
+- Sticky navbar with backdrop-blur, gold-underline active link styling, and a mobile slide-in drawer.
+- Scroll-triggered fade-in-up animation via `IntersectionObserver`, with `prefers-reduced-motion` fallback.
+- CSS-drawn gold geometric line pattern in the home hero (no external assets required).
+- Three sample blog posts authored as long-form, real content on financial planning (high-earner mistakes, the bucket strategy, Roth conversions).
+- New `.cloudcannon/config.yml` with `blog` collection editing config — title/date/author/excerpt inputs and a `tags` multiselect.
+- `public/sitemap.xml` placeholder alongside the build-time `@astrojs/sitemap`-generated `/sitemap-index.xml`; `public/robots.txt` now references the sitemap URL.
 
 ## [1.0.2] - 2026-04-13
 

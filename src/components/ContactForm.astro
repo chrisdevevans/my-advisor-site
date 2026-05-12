@@ -1,0 +1,155 @@
+---
+export interface Props {
+  action?: string;
+  method?: "post" | "get";
+}
+
+const { action = "#", method = "post" } = Astro.props;
+---
+
+<form class="contact-form" action={action} method={method} novalidate data-contact-form>
+  <div class="contact-form__grid">
+    <div class="field">
+      <label for="cf-name">Full Name <span class="required" aria-hidden="true">*</span></label>
+      <input
+        id="cf-name"
+        name="name"
+        type="text"
+        class="input"
+        required
+        autocomplete="name"
+        placeholder="Jane Doe"
+      />
+    </div>
+
+    <div class="field">
+      <label for="cf-email">Email <span class="required" aria-hidden="true">*</span></label>
+      <input
+        id="cf-email"
+        name="email"
+        type="email"
+        class="input"
+        required
+        autocomplete="email"
+        placeholder="jane@example.com"
+      />
+    </div>
+
+    <div class="field">
+      <label for="cf-phone">Phone <span class="optional">(optional)</span></label>
+      <input
+        id="cf-phone"
+        name="phone"
+        type="tel"
+        class="input"
+        autocomplete="tel"
+        placeholder="(555) 555-5555"
+      />
+    </div>
+
+    <div class="field">
+      <label for="cf-describe">What best describes you?</label>
+      <select id="cf-describe" name="describe" class="select" required>
+        <option value="" disabled selected>Select an option</option>
+        <option value="individual">Individual</option>
+        <option value="family">Family</option>
+        <option value="business-owner">Business Owner</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="cf-message">What are you hoping to accomplish? <span class="required" aria-hidden="true">*</span></label>
+    <textarea
+      id="cf-message"
+      name="message"
+      class="textarea"
+      required
+      placeholder="Tell us a bit about your financial goals or what's prompting this conversation…"
+    ></textarea>
+  </div>
+
+  <div class="contact-form__actions">
+    <button type="submit" class="btn btn--primary">Send Message</button>
+    <p class="contact-form__note">We typically respond within one business day.</p>
+  </div>
+
+  <div class="contact-form__status" role="status" aria-live="polite" data-status></div>
+</form>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+  const status = document.querySelector<HTMLElement>("[data-status]");
+
+  if (form && status) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      status.textContent = "Thanks — your message has been received. We'll be in touch shortly.";
+      status.classList.add("is-success");
+      form.reset();
+    });
+  }
+</script>
+
+<style>
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  .contact-form__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 640px) {
+    .contact-form__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .optional {
+    color: var(--color-muted);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: var(--fs-xs);
+    font-weight: 400;
+  }
+
+  .contact-form__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  @media (min-width: 640px) {
+    .contact-form__actions {
+      flex-direction: row;
+      align-items: center;
+      gap: var(--space-5);
+    }
+  }
+
+  .contact-form__note {
+    color: var(--color-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .contact-form__status {
+    min-height: 1.25rem;
+    color: var(--color-muted);
+    font-size: var(--fs-sm);
+  }
+
+  .contact-form__status.is-success {
+    color: var(--color-gold-light);
+  }
+</style>

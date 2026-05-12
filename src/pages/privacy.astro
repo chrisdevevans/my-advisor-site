@@ -1,0 +1,234 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="How Hargrove Wealth Advisory collects, uses, protects, and never sells your personal information."
+  noindex={false}
+>
+  <section class="page-hero">
+    <div class="container fade-up">
+      <span class="eyebrow">Legal</span>
+      <h1>Privacy Policy.</h1>
+      <hr class="gold-rule" />
+      <p class="legal-meta">Last updated: January 2025</p>
+    </div>
+  </section>
+
+  <article class="section">
+    <div class="container container--narrow legal">
+      <p class="legal__intro fade-up">
+        Hargrove Wealth Advisory ("we," "our," or "us") respects your privacy and is committed to
+        protecting it. As a registered investment adviser, we are also bound by federal and state
+        privacy regulations that apply specifically to financial services firms. This policy
+        describes what information we collect, how we use it, and the controls you have over it.
+      </p>
+
+      <section class="fade-up">
+        <h2>Information We Collect</h2>
+        <p>
+          We collect information you provide to us directly — when you fill out our contact form,
+          schedule a consultation, become a client, or correspond with us by phone or email. This
+          may include your name, address, phone number, email address, date of birth, Social
+          Security number, employment information, financial account information, investment
+          objectives, and other details necessary to provide our services.
+        </p>
+        <p>
+          We also collect limited information automatically when you visit our website, including
+          basic analytics data such as the pages you visited, your approximate location based on
+          IP address, the device and browser you used, and the date and time of your visit. We do
+          not use this information to identify you personally.
+        </p>
+      </section>
+
+      <section class="fade-up">
+        <h2>How We Use Your Information</h2>
+        <p>
+          We use the information you provide to deliver our advisory services: building your
+          financial plan, managing your investment accounts, preparing reports, responding to your
+          questions, meeting regulatory and tax-reporting obligations, and communicating with you
+          about your account and our firm. We do not use your information for any purpose
+          unrelated to providing you with financial advisory services.
+        </p>
+      </section>
+
+      <section class="fade-up">
+        <h2>Data Sharing and Third Parties</h2>
+        <p>
+          <strong>We do not sell your personal information.</strong> Ever. We do not rent it, trade
+          it, or share it with marketers. Period.
+        </p>
+        <p>
+          We do share information with a limited set of service providers who are necessary to
+          deliver our services — such as the custodian that holds your accounts (e.g. Schwab or
+          Fidelity), our portfolio reporting and financial planning software providers, our CPA
+          partners (only with your authorization), and our internal accounting and compliance
+          systems. Every third party we use is bound by confidentiality requirements and is
+          permitted to use your information only for the purpose of supporting our services.
+        </p>
+        <p>
+          We may also disclose information when required by law — for example, in response to a
+          valid subpoena, court order, or regulatory examination — and we will notify you of such
+          a disclosure where we are legally permitted to do so.
+        </p>
+      </section>
+
+      <section class="fade-up">
+        <h2>Security</h2>
+        <p>
+          We maintain administrative, technical, and physical safeguards designed to protect your
+          information. These include encrypted storage of sensitive data, role-based access
+          controls, multi-factor authentication for all employees, secure document portals for
+          exchanging financial information (we strongly discourage clients from sending account
+          numbers or tax documents over standard email), and annual security training for all
+          staff. No system is perfectly secure, but we treat your information with the seriousness
+          a financial firm should.
+        </p>
+      </section>
+
+      <section class="fade-up">
+        <h2>Your Rights</h2>
+        <p>
+          You have the right to:
+        </p>
+        <ul>
+          <li>request a copy of the personal information we hold about you;</li>
+          <li>request that we correct any inaccuracies in that information;</li>
+          <li>request that we delete information we are not legally required to retain;</li>
+          <li>opt out of any non-essential communications (we do not engage in marketing email of any kind, but you may also unsubscribe from any communications you receive);</li>
+          <li>file a complaint with your state's regulator or the SEC if you believe we have mishandled your information.</li>
+        </ul>
+        <p>
+          To exercise any of these rights, contact us at the email address below.
+        </p>
+      </section>
+
+      <section class="fade-up">
+        <h2>Cookies and Website Analytics</h2>
+        <p>
+          Our website uses minimal first-party cookies necessary for the site to function. We use
+          a privacy-respecting analytics tool that does not track you across other sites and does
+          not require a cookie banner under most regulations. You can block all cookies in your
+          browser settings without losing functionality on our site.
+        </p>
+      </section>
+
+      <section class="fade-up">
+        <h2>Children's Privacy</h2>
+        <p>
+          Our services are not directed to children under 18, and we do not knowingly collect
+          information from anyone under 18.
+        </p>
+      </section>
+
+      <section class="fade-up">
+        <h2>Changes to This Policy</h2>
+        <p>
+          We may update this policy from time to time to reflect changes in our practices or
+          regulatory requirements. When we do, we will update the "Last updated" date at the top
+          of this page and, for material changes, notify active clients directly.
+        </p>
+      </section>
+
+      <section class="fade-up">
+        <h2>Contact for Privacy Matters</h2>
+        <p>
+          If you have a question, concern, or request related to your privacy, please reach out:
+        </p>
+        <p class="legal__contact">
+          <strong>Hargrove Wealth Advisory</strong><br />
+          Attn: Chief Compliance Officer<br />
+          1240 Financial District Blvd, Suite 800<br />
+          New York, NY 10005<br />
+          <a href="mailto:privacy@hargrovewealth.com">privacy@hargrovewealth.com</a><br />
+          <a href="tel:+15552804400">(555) 280-4400</a>
+        </p>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-9) var(--space-7);
+    background:
+      radial-gradient(ellipse 40% 60% at 90% 0%, rgba(201, 168, 76, 0.07), transparent 70%),
+      var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .legal-meta {
+    color: var(--color-muted);
+    font-size: var(--fs-sm);
+    letter-spacing: 0.04em;
+    margin-top: var(--space-3);
+  }
+
+  .legal {
+    font-size: var(--fs-md);
+    line-height: 1.85;
+    color: var(--color-text);
+  }
+
+  .legal__intro {
+    color: var(--color-muted);
+    font-size: var(--fs-md);
+    margin-bottom: var(--space-7);
+    padding-bottom: var(--space-6);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .legal section + section {
+    margin-top: var(--space-7);
+  }
+
+  .legal h2 {
+    font-size: var(--fs-2xl);
+    font-family: var(--font-display);
+    font-weight: 500;
+    margin-bottom: var(--space-4);
+    color: var(--color-text);
+  }
+
+  .legal p {
+    margin-bottom: var(--space-4);
+    color: var(--color-text);
+  }
+
+  .legal strong {
+    color: var(--color-gold-light);
+    font-weight: 600;
+  }
+
+  .legal ul {
+    list-style: disc;
+    padding-left: var(--space-5);
+    margin-bottom: var(--space-4);
+  }
+
+  .legal li {
+    margin-bottom: var(--space-3);
+    line-height: 1.7;
+  }
+
+  .legal a {
+    color: var(--color-gold);
+    text-decoration: underline;
+    text-decoration-color: rgba(201, 168, 76, 0.4);
+    text-underline-offset: 3px;
+    transition: color var(--t-base) var(--ease);
+  }
+
+  .legal a:hover {
+    color: var(--color-gold-light);
+  }
+
+  .legal__contact {
+    padding: var(--space-5);
+    background-color: var(--color-surface);
+    border-left: 2px solid var(--color-gold);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    line-height: 2;
+  }
+</style>

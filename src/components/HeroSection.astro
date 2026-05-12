@@ -1,0 +1,171 @@
+---
+export interface CTA {
+  label: string;
+  href: string;
+  variant?: "primary" | "ghost";
+}
+
+export interface Props {
+  eyebrow?: string;
+  headline?: string;
+  subheadline?: string;
+  ctas?: CTA[];
+  trustItems?: string[];
+}
+
+const {
+  eyebrow,
+  headline = "Your Wealth. Thoughtfully Managed.",
+  subheadline = "Bespoke financial planning for individuals, families, and institutions seeking long-term prosperity.",
+  ctas = [
+    { label: "Schedule a Consultation", href: "/contact/", variant: "primary" },
+    { label: "Our Services", href: "/services/", variant: "ghost" },
+  ],
+  trustItems = [
+    "20+ Years Experience",
+    "$2B+ Assets Managed",
+    "500+ Families Served",
+  ],
+} = Astro.props;
+---
+
+<section class="hero" aria-labelledby="hero-headline">
+  <div class="hero__pattern" aria-hidden="true">
+    <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="hero-grid" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+          <path d="M 80 0 L 0 0 0 80" fill="none" stroke="rgba(201,168,76,0.06)" stroke-width="1" />
+        </pattern>
+        <linearGradient id="hero-fade" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#0A0C0F" stop-opacity="0" />
+          <stop offset="100%" stop-color="#0A0C0F" stop-opacity="1" />
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="800" fill="url(#hero-grid)" />
+      <g stroke="rgba(201,168,76,0.18)" stroke-width="1" fill="none">
+        <line x1="0" y1="280" x2="1200" y2="120" />
+        <line x1="0" y1="540" x2="1200" y2="320" />
+        <line x1="900" y1="0" x2="1200" y2="380" />
+        <line x1="200" y1="800" x2="900" y2="0" />
+      </g>
+      <g fill="rgba(201,168,76,0.5)">
+        <circle cx="900" cy="240" r="3" />
+        <circle cx="1080" cy="380" r="2" />
+        <circle cx="220" cy="560" r="2" />
+      </g>
+      <rect width="1200" height="800" fill="url(#hero-fade)" />
+    </svg>
+  </div>
+
+  <div class="container hero__inner">
+    <div class="hero__content fade-up">
+      {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+      <h1 id="hero-headline" class="hero__headline">{headline}</h1>
+      <p class="hero__sub">{subheadline}</p>
+
+      {
+        ctas.length > 0 && (
+          <div class="hero__ctas">
+            {ctas.map((cta) => (
+              <a
+                href={cta.href}
+                class:list={["btn", cta.variant === "ghost" ? "btn--ghost" : "btn--primary"]}
+              >
+                {cta.label}
+              </a>
+            ))}
+          </div>
+        )
+      }
+
+      {
+        trustItems.length > 0 && (
+          <ul class="hero__trust">
+            {trustItems.map((item, i) => (
+              <>
+                {i > 0 && <li class="hero__trust-sep" aria-hidden="true">·</li>}
+                <li>{item}</li>
+              </>
+            ))}
+          </ul>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(201, 168, 76, 0.06), transparent 70%),
+      radial-gradient(ellipse 50% 60% at 10% 90%, rgba(26, 58, 92, 0.18), transparent 70%),
+      var(--color-bg);
+  }
+
+  .hero__pattern {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero__pattern svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero__inner {
+    position: relative;
+    padding-block: var(--space-10) var(--space-9);
+  }
+
+  .hero__content {
+    max-width: 760px;
+  }
+
+  .hero__headline {
+    font-family: var(--font-display);
+    font-weight: 500;
+    margin-bottom: var(--space-5);
+  }
+
+  .hero__sub {
+    font-size: var(--fs-md);
+    color: var(--color-muted);
+    line-height: 1.65;
+    max-width: 56ch;
+    margin-bottom: var(--space-7);
+  }
+
+  @media (min-width: 768px) {
+    .hero__sub {
+      font-size: var(--fs-lg);
+    }
+  }
+
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+
+  .hero__trust {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .hero__trust-sep {
+    color: var(--color-gold);
+  }
+</style>

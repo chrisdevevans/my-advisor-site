@@ -1,0 +1,227 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ContactForm from "@components/ContactForm.astro";
+---
+
+<BaseLayout
+  title="Contact"
+  description="Schedule a free, no-obligation conversation with the team at Hargrove Wealth Advisory. Call (555) 280-4400 or send a message."
+>
+  <section class="page-hero">
+    <div class="container fade-up">
+      <span class="eyebrow">Contact</span>
+      <h1>Let's Talk.</h1>
+      <hr class="gold-rule" />
+      <p class="lede">Your first conversation is always free and without obligation.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-grid">
+      <div class="contact-info fade-up">
+        <h2>Get in touch</h2>
+        <p class="contact-info__lede">
+          We're a small team and we answer our own phones. The fastest way to reach us is to call
+          during business hours; otherwise email or the form on the right both work well.
+        </p>
+
+        <ul class="contact-info__list">
+          <li>
+            <span class="contact-info__label">Phone</span>
+            <a href="tel:+15552804400">(555) 280-4400</a>
+          </li>
+          <li>
+            <span class="contact-info__label">Email</span>
+            <a href="mailto:hello@hargrovewealth.com">hello@hargrovewealth.com</a>
+          </li>
+          <li>
+            <span class="contact-info__label">Office</span>
+            <address>
+              1240 Financial District Blvd<br />
+              Suite 800<br />
+              New York, NY 10005
+            </address>
+          </li>
+          <li>
+            <span class="contact-info__label">Hours</span>
+            <span>Mon–Fri, 8:30am – 5:30pm EST</span>
+          </li>
+        </ul>
+
+        <div class="map" aria-label="Map placeholder showing our New York office location">
+          <div class="map__inner">
+            <svg viewBox="0 0 100 100" aria-hidden="true" class="map__pin">
+              <path
+                d="M50 12c-11 0-20 8.6-20 19.2C30 47 50 76 50 76s20-29 20-44.8C70 20.6 61 12 50 12zm0 25.6a6.4 6.4 0 110-12.8 6.4 6.4 0 010 12.8z"
+                fill="currentColor"
+              />
+            </svg>
+            <span class="map__label">Visit Us — Financial District, NYC</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap fade-up">
+        <h2 class="sr-only">Send a message</h2>
+        <ContactForm />
+
+        <div class="calendly">
+          <p>Prefer to book directly?</p>
+          <a href="#" class="btn btn--ghost calendly__btn">
+            Schedule on Calendly
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-9) var(--space-7);
+    background:
+      radial-gradient(ellipse 40% 60% at 90% 0%, rgba(201, 168, 76, 0.07), transparent 70%),
+      var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-hero .lede {
+    margin-top: var(--space-4);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  @media (min-width: 960px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1.2fr;
+      gap: var(--space-9);
+    }
+  }
+
+  .contact-info h2 {
+    font-size: var(--fs-2xl);
+    margin-bottom: var(--space-4);
+  }
+
+  .contact-info__lede {
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin-bottom: var(--space-6);
+    max-width: 40ch;
+  }
+
+  .contact-info__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    margin-bottom: var(--space-7);
+  }
+
+  .contact-info__list li {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding-bottom: var(--space-5);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .contact-info__list li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .contact-info__label {
+    font-size: var(--fs-xs);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    font-weight: 500;
+  }
+
+  .contact-info__list a {
+    color: var(--color-text);
+    font-size: var(--fs-md);
+    transition: color var(--t-base) var(--ease);
+  }
+
+  .contact-info__list a:hover {
+    color: var(--color-gold-light);
+  }
+
+  .contact-info__list address {
+    font-style: normal;
+    line-height: 1.7;
+  }
+
+  .map {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    position: relative;
+    background-image:
+      linear-gradient(rgba(201, 168, 76, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201, 168, 76, 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .map__inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    color: var(--color-gold);
+  }
+
+  .map__pin {
+    width: 40px;
+    height: 40px;
+  }
+
+  .map__label {
+    font-size: var(--fs-sm);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .contact-form-wrap {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-7);
+  }
+
+  @media (max-width: 640px) {
+    .contact-form-wrap {
+      padding: var(--space-5);
+    }
+  }
+
+  .calendly {
+    margin-top: var(--space-7);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .calendly p {
+    color: var(--color-muted);
+    margin-bottom: var(--space-4);
+    font-size: var(--fs-sm);
+  }
+
+  .calendly__btn {
+    gap: var(--space-3);
+  }
+</style>

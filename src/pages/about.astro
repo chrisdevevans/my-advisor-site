@@ -1,0 +1,370 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import TeamCard from "@components/TeamCard.astro";
+import CTABanner from "@components/CTABanner.astro";
+
+const values = [
+  {
+    title: "Fiduciary Duty",
+    icon: "shield",
+    body: "We are legally obligated to act in your interest. Always. No exceptions.",
+  },
+  {
+    title: "Transparency",
+    icon: "eye",
+    body: "Our fees are clear, our methods are documented, and our reasoning is shared.",
+  },
+  {
+    title: "Independence",
+    icon: "compass",
+    body: "We are owner-operated and unaffiliated with any product manufacturer.",
+  },
+  {
+    title: "Long-Term Thinking",
+    icon: "tree",
+    body: "We measure success in decades, not quarters. Patience compounds.",
+  },
+];
+
+const timeline = [
+  { year: "2003", text: "Founded by Robert Hargrove and a second partner with 12 founding clients." },
+  { year: "2008", text: "Navigated the financial crisis with disciplined rebalancing; no client took permanent losses on plan." },
+  { year: "2015", text: "Expanded service model to institutional and endowment clients." },
+  { year: "2020", text: "Launched digital planning tools for clients to view their full picture in one place." },
+  { year: "2024", text: "$2B in assets under management; 500+ households served." },
+];
+
+const teamPreview = [
+  {
+    name: "Robert Hargrove, CFP®, CFA",
+    title: "Founding Partner",
+    bio: "25 years of experience. Specializes in estate and retirement planning. Wharton MBA. Coaches youth soccer on weekends.",
+    credentials: ["CFP®", "CFA"],
+  },
+  {
+    name: "Sarah Whitfield, CFP®",
+    title: "Partner, Wealth Management",
+    bio: "18 years of experience. Focus on women in transition — divorce, widowhood, and inheritance. CFA Institute member.",
+    credentials: ["CFP®", "CFA Member"],
+  },
+  {
+    name: "David Kim, CPA, CFP®",
+    title: "Director of Tax Strategy",
+    bio: "12 years of experience. Former Big 4 tax consultant. Specializes in business owners and real estate investors.",
+    credentials: ["CFP®", "CPA"],
+  },
+];
+---
+
+<BaseLayout
+  title="About Us"
+  description="An independent, fee-only, fiduciary financial advisory firm. Founded in 2003 to give clients clarity, confidence, and a plan built around their life."
+>
+  <!-- Page hero -->
+  <section class="page-hero">
+    <div class="container fade-up">
+      <span class="eyebrow">About Us</span>
+      <h1>A different kind of advisory.</h1>
+      <hr class="gold-rule" />
+      <p class="lede">
+        Independent, fee-only, fiduciary — and committed to the families and institutions we serve
+        for the long term.
+      </p>
+    </div>
+  </section>
+
+  <!-- Our Story -->
+  <section class="section" aria-labelledby="our-story">
+    <div class="container container--narrow story">
+      <header class="fade-up">
+        <span class="eyebrow">Our Story</span>
+        <h2 id="our-story">Twenty years of disciplined work.</h2>
+      </header>
+
+      <div class="story__body fade-up">
+        <p>
+          Hargrove Wealth Advisory was founded in 2003 by two partners who had spent the previous
+          decade inside the largest names in finance and concluded the same thing: the brokerage
+          model wasn't designed around the client. They built something different — independent,
+          fee-only, and bound by the fiduciary standard. Twelve families took a chance on them in
+          the first year.
+        </p>
+        <p>
+          Twenty-plus years later, we serve more than 500 households and institutional clients
+          across the country. We've intentionally stayed boutique. We turn down more business than
+          we take. Our advisors carry small books because we believe the quality of advice depends on
+          the time we spend with each client — and the time we spend with the math.
+        </p>
+        <p class="story__mission">
+          <strong>Our mission:</strong> to empower clients with clarity, confidence, and a plan
+          built around their life.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section section--surface" aria-labelledby="values">
+    <div class="container">
+      <header class="section-head fade-up">
+        <span class="eyebrow">Our Values</span>
+        <h2 id="values">What we hold to.</h2>
+      </header>
+
+      <div class="values-grid">
+        {
+          values.map((v) => (
+            <div class="value card fade-up">
+              <div class="value__icon" aria-hidden="true">
+                {v.icon === "shield" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3l8 3v6c0 5-3.5 8.5-8 9-4.5-.5-8-4-8-9V6l8-3z" />
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
+                )}
+                {v.icon === "eye" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                )}
+                {v.icon === "compass" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="9" />
+                    <polygon points="16,8 13,13 8,16 11,11" />
+                  </svg>
+                )}
+                {v.icon === "tree" && (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 3v18" />
+                    <path d="M12 9l-4-4M12 9l4-4M12 15l-5-3M12 15l5-3" />
+                  </svg>
+                )}
+              </div>
+              <h3>{v.title}</h3>
+              <p>{v.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="section" aria-labelledby="timeline">
+    <div class="container container--narrow">
+      <header class="section-head fade-up">
+        <span class="eyebrow">Milestones</span>
+        <h2 id="timeline">Twenty-plus years, deliberately built.</h2>
+      </header>
+
+      <ol class="timeline">
+        {
+          timeline.map((item) => (
+            <li class="timeline__item fade-up">
+              <span class="timeline__year">{item.year}</span>
+              <p class="timeline__text">{item.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- Team preview -->
+  <section class="section section--surface" aria-labelledby="team-preview">
+    <div class="container">
+      <header class="section-head fade-up">
+        <span class="eyebrow">Leadership</span>
+        <h2 id="team-preview">A small, experienced team.</h2>
+        <p class="lede">
+          You'll know your advisor by name and they'll know your story. That's the model.
+        </p>
+      </header>
+
+      <div class="team-preview-grid">
+        {
+          teamPreview.map((m) => (
+            <TeamCard
+              name={m.name}
+              title={m.title}
+              bio={m.bio}
+              credentials={m.credentials}
+            />
+          ))
+        }
+      </div>
+
+      <div class="team-preview__cta fade-up">
+        <a href="/team/" class="btn btn--ghost">Meet the full team</a>
+      </div>
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-block: var(--space-9) var(--space-7);
+    background:
+      radial-gradient(ellipse 40% 60% at 90% 0%, rgba(201, 168, 76, 0.07), transparent 70%),
+      var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .page-hero h1 {
+    max-width: 16ch;
+  }
+
+  .page-hero .lede {
+    margin-top: var(--space-4);
+  }
+
+  .section-head {
+    max-width: 720px;
+    margin-bottom: var(--space-7);
+  }
+
+  .section-head h2 {
+    margin-bottom: var(--space-4);
+  }
+
+  .section--surface {
+    background-color: var(--color-surface);
+    border-block: 1px solid var(--color-border);
+  }
+
+  .story header {
+    margin-bottom: var(--space-6);
+  }
+
+  .story__body p + p {
+    margin-top: var(--space-4);
+  }
+
+  .story__body p {
+    color: var(--color-text);
+    line-height: 1.8;
+    font-size: var(--fs-md);
+  }
+
+  .story__mission {
+    padding: var(--space-5);
+    border-left: 2px solid var(--color-gold);
+    background-color: var(--color-surface);
+    margin-top: var(--space-6) !important;
+    font-style: italic;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 640px) {
+    .values-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 960px) {
+    .values-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .value {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    height: 100%;
+  }
+
+  .value__icon {
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gold);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--space-2);
+  }
+
+  .value__icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .value h3 {
+    font-size: var(--fs-lg);
+    font-family: var(--font-display);
+    font-weight: 500;
+  }
+
+  .value p {
+    color: var(--color-muted);
+    line-height: 1.6;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: var(--space-6);
+    border-left: 1px solid var(--color-border-strong);
+  }
+
+  .timeline__item {
+    position: relative;
+    padding-block: var(--space-5);
+  }
+
+  .timeline__item + .timeline__item {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .timeline__item::before {
+    content: "";
+    position: absolute;
+    left: calc(var(--space-6) * -1 - 5px);
+    top: calc(var(--space-5) + 0.6rem);
+    width: 11px;
+    height: 11px;
+    background-color: var(--color-gold);
+    border: 2px solid var(--color-bg);
+    border-radius: 50%;
+  }
+
+  .timeline__year {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    color: var(--color-gold);
+    font-weight: 500;
+    margin-bottom: var(--space-2);
+  }
+
+  .timeline__text {
+    color: var(--color-text);
+    line-height: 1.7;
+  }
+
+  .team-preview-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+  }
+
+  @media (min-width: 768px) {
+    .team-preview-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .team-preview__cta {
+    margin-top: var(--space-7);
+    text-align: center;
+  }
+</style>

@@ -1,0 +1,116 @@
+---
+export interface Props {
+  title: string;
+  href: string;
+  date: Date | string;
+  author: string;
+  excerpt: string;
+  tags?: string[];
+}
+
+const { title, href, date, author, excerpt, tags = [] } = Astro.props;
+
+const dateObj = date instanceof Date ? date : new Date(date);
+const formattedDate = dateObj.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+const isoDate = dateObj.toISOString().split("T")[0];
+---
+
+<article class="blog-card card fade-up">
+  {
+    tags.length > 0 && (
+      <ul class="blog-card__tags" aria-label="Tags">
+        {tags.map((tag) => (
+          <li>{tag}</li>
+        ))}
+      </ul>
+    )
+  }
+
+  <h3 class="blog-card__title">
+    <a href={href}>{title}</a>
+  </h3>
+
+  <p class="blog-card__excerpt">{excerpt}</p>
+
+  <div class="blog-card__meta">
+    <span class="blog-card__author">{author}</span>
+    <span class="blog-card__dot" aria-hidden="true">·</span>
+    <time datetime={isoDate}>{formattedDate}</time>
+  </div>
+
+  <a href={href} class="btn--link blog-card__link">Read More</a>
+</article>
+
+<style>
+  .blog-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    height: 100%;
+  }
+
+  .blog-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .blog-card__tags li {
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.625rem;
+    background: rgba(201, 168, 76, 0.08);
+    border: 1px solid rgba(201, 168, 76, 0.25);
+    color: var(--color-gold-light);
+    border-radius: var(--radius-pill);
+  }
+
+  .blog-card__title {
+    font-family: var(--font-display);
+    font-size: var(--fs-xl);
+    line-height: 1.25;
+    font-weight: 500;
+  }
+
+  .blog-card__title a {
+    color: var(--color-text);
+    transition: color var(--t-base) var(--ease);
+  }
+
+  .blog-card__title a:hover {
+    color: var(--color-gold-light);
+  }
+
+  .blog-card__excerpt {
+    color: var(--color-muted);
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .blog-card__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--fs-sm);
+    color: var(--color-muted);
+  }
+
+  .blog-card__author {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  .blog-card__dot {
+    color: var(--color-gold);
+  }
+
+  .blog-card__link {
+    align-self: flex-start;
+    margin-top: var(--space-2);
+  }
+</style>

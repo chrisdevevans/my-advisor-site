@@ -1,102 +1,124 @@
 ---
-import { ClientRouter } from "astro:transitions";
-import { fade } from "astro:transitions";
-import SeoHead from "@components/utils/SeoHead.astro";
-import StructuredData from "@components/utils/StructuredData.astro";
-import seoData from "@data/seo.json";
-import "@styles/style.css";
-import SiteFonts from "@layouts/SiteFonts.astro";
-import VideoElements from "@components/utils/VideoElements.astro";
+import Navbar from "@components/Navbar.astro";
+import Footer from "@components/Footer.astro";
+import "@styles/global.css";
 
 export interface Props {
-  title: string;
-  description?: string | null;
-  keywords?: string[] | null;
-  image?: string | null;
-  canonical?: string | null;
-  type?: "website" | "article";
-  article?: {
-    publishedTime?: string | null;
-    modifiedTime?: string | null;
-    author?: string | string[] | null;
-    tags?: string[] | null;
-  } | null;
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
   noindex?: boolean;
+  bodyClass?: string;
 }
 
-const props = Astro.props;
+const {
+  title = "Hargrove Wealth Advisory — Bespoke Wealth Management",
+  description = "Independent, fee-only fiduciary financial advisors helping individuals, families, and institutions build long-term prosperity.",
+  image = "/og-image.jpg",
+  canonical,
+  noindex = false,
+  bodyClass = "",
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "https://hargrovewealth.com";
+const pageUrl = canonical ?? new URL(Astro.url.pathname, siteUrl).toString();
+const ogImage = image.startsWith("http") ? image : `${siteUrl}${image}`;
+const fullTitle = title.includes("Hargrove") ? title : `${title} — Hargrove Wealth Advisory`;
 ---
 
 <!doctype html>
-<html
-  lang="en"
-  data-theme="light"
->
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={pageUrl} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Hargrove Wealth Advisory" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <meta name="theme-color" content="#0A0C0F" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="icon"
-      type="image/svg+xml"
-      href="/favicon.svg"
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap"
     />
-    <meta
-      name="generator"
-      content={Astro.generator}
-    />
-    <style is:inline>
-      @layer reset, base, components, page-sections, utils, overrides;
-    </style>
 
-    <SiteFonts />
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap-index.xml" />
 
-    {
-      import.meta.env.DEV ? (
-        <script
-          type="module"
-          src="/@vite/client"
-        />
-      ) : null
-    }
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <Navbar />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
 
     <script>
-      if (window.inEditorMode) {
-        import("../../live-editing");
-        import("../../editor-live-sync");
+      // Reveal-on-scroll for elements with .fade-up
+      const reveal = () => {
+        const els = document.querySelectorAll<HTMLElement>(".fade-up");
+        if (!("IntersectionObserver" in window)) {
+          els.forEach((el) => el.classList.add("is-visible"));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+        );
+        els.forEach((el) => io.observe(el));
+      };
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", reveal);
+      } else {
+        reveal();
       }
     </script>
 
-    <SeoHead
-      site={seoData}
-      title={props.title}
-      description={props.description}
-      keywords={props.keywords}
-      image={props.image}
-      canonical={props.canonical}
-      type={props.type}
-      article={props.article}
-      noindex={props.noindex}
-    />
+    <style>
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 16px;
+        background: var(--color-gold);
+        color: var(--color-bg);
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        z-index: 1000;
+        font-weight: 500;
+        transition: top 200ms ease;
+      }
 
-    <StructuredData site={seoData} />
-
-    <link
-      rel="sitemap"
-      type="application/xml"
-      title="Sitemap"
-      href="/sitemap-index.xml"
-    />
-
-    <slot name="head" />
-    <ClientRouter />
-  </head>
-  <body>
-    <div transition:animate={fade({ duration: "0.2s" })}>
-      <slot />
-    </div>
-    <VideoElements />
+      .skip-link:focus {
+        top: 16px;
+      }
+    </style>
   </body>
 </html>

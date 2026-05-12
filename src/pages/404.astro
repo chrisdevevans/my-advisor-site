@@ -1,51 +1,65 @@
 ---
-import Button from "@core-elements/button/Button.astro";
-import footerData from "@data/footer.json";
-import mainNavData from "@data/mainNav.json";
-import seoData from "@data/seo.json";
-import Page from "@layouts/Page.astro";
-
-const canonical = new URL("/404.html", Astro.site ?? seoData.url).href;
+import BaseLayout from "@layouts/BaseLayout.astro";
 ---
 
-<Page
-  title="Page not found"
-  description="This URL does not exist on this site. Use the navigation or go home to find what you need."
-  canonical={canonical}
-  mainNav={mainNavData}
-  footer={footerData}
+<BaseLayout
+  title="Page Not Found"
+  description="The page you're looking for doesn't exist."
+  noindex={true}
 >
   <section class="not-found">
-    <h1>Page not found</h1>
-    <p>Something went wrong, or this page has moved.</p>
-    <Button
-      text="Go to home"
-      link="/"
-      variant="primary"
-      size="md"
-      hideText={false}
-      iconName=""
-      iconPosition="before"
-    />
+    <div class="container container--tight fade-up">
+      <span class="not-found__code">404</span>
+      <h1>This page wandered off.</h1>
+      <hr class="gold-rule gold-rule--center" />
+      <p class="lede">
+        The link may be outdated, or we may have moved the page. The fastest way home is below.
+      </p>
+      <div class="not-found__actions">
+        <a href="/" class="btn btn--primary">Return Home</a>
+        <a href="/contact/" class="btn btn--ghost">Contact Us</a>
+      </div>
+    </div>
   </section>
-</Page>
+</BaseLayout>
 
 <style>
   .not-found {
-    box-sizing: border-box;
-    margin-inline: auto;
-    max-width: 36rem;
-    padding: var(--spacing-4xl) var(--spacing-xl);
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+    padding-block: var(--space-9);
+  }
+
+  .not-found .gold-rule {
+    margin-inline: auto;
+  }
+
+  .not-found__code {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 12vw, 7rem);
+    color: var(--color-gold);
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: var(--space-4);
   }
 
   .not-found h1 {
-    font-size: var(--font-size-3xl);
-    margin: 0 0 var(--spacing-md);
+    margin-bottom: var(--space-4);
   }
 
-  .not-found p {
-    color: var(--color-text-muted);
-    margin: 0 0 var(--spacing-xl);
+  .not-found .lede {
+    margin-inline: auto;
+    margin-bottom: var(--space-6);
+  }
+
+  .not-found__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    justify-content: center;
   }
 </style>

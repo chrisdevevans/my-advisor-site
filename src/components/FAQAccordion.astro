@@ -1,0 +1,95 @@
+---
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export interface Props {
+  items?: FAQItem[];
+}
+
+const { items = [] } = Astro.props;
+---
+
+<div class="faq fade-up">
+  {
+    items.map((item, i) => (
+      <details class="faq__item" name="faq-group" open={i === 0}>
+        <summary class="faq__question">
+          <span>{item.question}</span>
+          <span class="faq__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </span>
+        </summary>
+        <div class="faq__answer">
+          <p>{item.answer}</p>
+        </div>
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  .faq {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .faq__item {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: border-color var(--t-base) var(--ease);
+  }
+
+  .faq__item[open] {
+    border-color: var(--color-border-strong);
+  }
+
+  .faq__question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-5) var(--space-5);
+    font-family: var(--font-display);
+    font-size: var(--fs-md);
+    font-weight: 500;
+    color: var(--color-text);
+    cursor: pointer;
+    list-style: none;
+    transition: color var(--t-base) var(--ease);
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__question:hover {
+    color: var(--color-gold-light);
+  }
+
+  .faq__icon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    color: var(--color-gold);
+    transition: transform var(--t-base) var(--ease);
+  }
+
+  .faq__item[open] .faq__icon {
+    transform: rotate(180deg);
+  }
+
+  .faq__answer {
+    padding: 0 var(--space-5) var(--space-5);
+    color: var(--color-muted);
+    line-height: 1.75;
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-4);
+  }
+</style>
