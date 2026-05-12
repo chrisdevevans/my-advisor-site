@@ -22,6 +22,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 
+- CloudCannon Pages collection now shows live previews and opens each entry in the Visual Editor at its real URL. Each `src/data/pages/*.json` file gained a `_path` field, and the collection's `url` template was changed from `disable_url: true` to `url: "{_path}"`. Renamed `src/data/pages/index.json` → `home.json` because CloudCannon treats files literally named `index` as the collection root (the entry was showing up as "Pages" instead of "Home"). Card preview text now reads from a new `_pageName` field and falls back to `meta.title`.
+- The previous version of `cloudcannon.config.yml` used three keys that CloudCannon does not support (`_paths_options`, `_array_structures`, and dot-notation `_inputs` like `meta.title:`), which caused CloudCannon to drop the entire config and hide every collection in the sidebar. The config has been rewritten using only documented keys.
 - CloudCannon now shows the blog collection in the dashboard. The root `cloudcannon.config.yml` (which CloudCannon loads in preference to `.cloudcannon/config.yml`) was still pointing at the old starter's `src/content/pages` directory and used a `**/*.mdx` glob on the blog collection — so it saw zero pages and zero blog posts after the site rewrite. The root config has been replaced with a clean, matching configuration: `blog` collection at `src/content/blog`, glob `**/*.md`, with `title` / `date` / `author` / `excerpt` / `tags` / `image` inputs and a working "New Blog Post" schema.
 
 ### Changed

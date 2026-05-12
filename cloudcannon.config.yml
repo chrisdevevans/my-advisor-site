@@ -10,23 +10,42 @@ paths:
 collections_config:
   # ------------------------------------------------------------------
   # PAGES — one JSON data file per marketing page.
+  # Each file has a `_path` field that tells CloudCannon which live URL
+  # to open in the Visual Editor (and to use for card previews).
   # ------------------------------------------------------------------
   pages:
     path: src/data/pages
     glob:
       - "**/*.json"
     output: false
-    disable_url: true
+    url: "{_path}"
     icon: web
     name: Pages
     singular_name: Page
-    description: Marketing pages of the site. Each file is the structured content of one page; the page templates render this data automatically. To preview a page after editing, open the live site URL in another tab — the build will redeploy with your changes.
+    description: Marketing pages of the site. Each file is the structured content of one page; the page templates render this data automatically.
     disable_add: true
     disable_add_folder: true
     disable_file_actions: true
     _enabled_editors:
+      - visual
       - data
+    preview:
+      text:
+        - key: _pageName
+        - key: meta.title
+      subtext:
+        - key: meta.description
+      icon:
+        - web
     _inputs:
+      _path:
+        type: text
+        comment: Live URL of this page on the site. Do not change.
+        options:
+          empty_type: string
+      _pageName:
+        type: text
+        comment: Display name for this page in the CloudCannon dashboard. Does not appear on the site.
       meta:
         type: object
         comment: SEO title and description for this page.
@@ -89,6 +108,7 @@ collections_config:
 
   # ------------------------------------------------------------------
   # SITE SETTINGS — brand, nav, footer, contact, SEO. Shared chrome.
+  # Single file (site.json) — surfaces under the "Site" sidebar group.
   # ------------------------------------------------------------------
   site:
     path: src/data
@@ -105,6 +125,14 @@ collections_config:
     disable_file_actions: true
     _enabled_editors:
       - data
+    preview:
+      text:
+        - Site Settings
+      subtext:
+        - key: brand.title
+        - Brand, contact, navigation, footer & SEO
+      icon:
+        - settings
     _inputs:
       brand:
         type: object
