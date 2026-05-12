@@ -40,6 +40,8 @@ const posts = (await getCollection("blog")).sort(
                 author={post.data.author}
                 excerpt={post.data.excerpt}
                 tags={post.data.tags}
+                image={post.data.image}
+                imageAlt={post.data.title}
               />
             ))}
           </div>

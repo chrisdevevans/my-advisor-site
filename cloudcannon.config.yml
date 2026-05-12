@@ -196,13 +196,13 @@ collections_config:
         comment: Short summary shown on the blog index card and in social previews.
       image:
         type: image
-        comment: Optional hero image.
+        comment: Cover image shown at the top of the post page and on the blog index card. Recommended 1600×900 (16:9). Optional — posts without an image use a placeholder.
         options:
           paths:
-            uploads: public/uploads
-          resize_style: contain
-          width: 1920
-          height: 1080
+            uploads: public/uploads/blog
+          resize_style: cover
+          width: 1600
+          height: 900
       tags:
         type: multiselect
         comment: Topics for filtering. Pick any that apply.
@@ -225,9 +225,17 @@ collections_config:
         blockquote: true
         code: true
         horizontalrule: true
+        image: true
+        image_size_attributes: true
+        embed: false
+        table: false
         undo: true
         redo: true
         removeformat: true
+        paths:
+          uploads: public/uploads/blog
+        image_resize_style: contain
+        image_size: 1400
 
 collection_groups:
   - heading: Content
