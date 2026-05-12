@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- **Fully data-driven pages** — every marketing page (Home, About, Services, Team, Contact, Privacy) is now powered by a JSON data file in `src/data/pages/`. The `.astro` page templates are thin shells that render the data, so all copy, lists, stats, testimonials, team members, services, process steps, fee tiers, and privacy sections can be edited without touching code.
+- **Global `src/data/site.json`** — brand wordmark, full contact block (phone, email, address, hours), top nav links + CTA, footer links and disclaimer, and SEO defaults. The Navbar, Footer, and `BaseLayout` now read from this file, so updates propagate site-wide.
+- CloudCannon **"Pages"** collection — surfaces all of `src/data/pages/*.json` with structured `_inputs` for each section, per-file preview URLs (so Visual Editor opens the right route), and file-locked controls (no accidental add/delete of page data).
+- CloudCannon **"Site Settings"** collection (single-file, `src/data/site.json`) — brand, contact, nav, footer, and SEO defaults all visible as edit-only fields.
+- `markdown-it` rendering for `sections[*].body` on the Privacy page so editors can write paragraphs, bullet lists, and `**bold**` inside the JSON body fields.
+- `ContactForm` now accepts `submitLabel`, `responseNote`, and `successMessage` props, all wired through `src/data/pages/contact.json` so every form string is editable.
+
+### Changed
+
+- `src/data/` was cleared of unused starter files (`footer.json`, `mainNav.json`, `seo.json`) and rebuilt around the new shape (`site.json` + `pages/*.json`).
+- `ServiceCard` icon prop loosened from a strict string union to `string` so JSON-sourced icon names type-check cleanly.
+
 ### Fixed
 
 - CloudCannon now shows the blog collection in the dashboard. The root `cloudcannon.config.yml` (which CloudCannon loads in preference to `.cloudcannon/config.yml`) was still pointing at the old starter's `src/content/pages` directory and used a `**/*.mdx` glob on the blog collection — so it saw zero pages and zero blog posts after the site rewrite. The root config has been replaced with a clean, matching configuration: `blog` collection at `src/content/blog`, glob `**/*.md`, with `title` / `date` / `author` / `excerpt` / `tags` / `image` inputs and a working "New Blog Post" schema.

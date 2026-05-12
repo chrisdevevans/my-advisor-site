@@ -1,13 +1,5 @@
 # CloudCannon configuration — Hargrove Wealth Advisory
-#
-# Docs: https://cloudcannon.com/documentation/articles/configure-your-collections
-#
-# Structure:
-#   - "Site Settings" (src/data/site.json): brand, contact info, nav links, footer
-#     links, SEO defaults. Edits propagate to every page (header + footer chrome).
-#   - "Pages" (src/data/pages/*.json): one file per marketing page. The .astro
-#     templates in src/pages/ are thin shells that render this data.
-#   - "Blog Posts" (src/content/blog/*.md): Astro content collection.
+# Docs: https://cloudcannon.com/documentation/developer-reference/configuration-file/collections_config/
 
 source: ""
 
@@ -18,158 +10,82 @@ paths:
 collections_config:
   # ------------------------------------------------------------------
   # PAGES — one JSON data file per marketing page.
-  # Each file is wired to its preview URL so clicking a page opens the
-  # correct route in the Visual Editor.
   # ------------------------------------------------------------------
   pages:
     path: src/data/pages
     glob:
       - "**/*.json"
     output: false
+    disable_url: true
     icon: web
     name: Pages
     singular_name: Page
-    description: Marketing pages of the site. Edit the structured content here; the page templates render it automatically.
+    description: Marketing pages of the site. Each file is the structured content of one page; the page templates render this data automatically. To preview a page after editing, open the live site URL in another tab — the build will redeploy with your changes.
     disable_add: true
     disable_add_folder: true
     disable_file_actions: true
     _enabled_editors:
       - data
-      - visual
-    _array_structures: {}
     _inputs:
-      # ---- Page meta (shared shape on every page) ----
       meta:
         type: object
-        comment: SEO and social metadata for this page.
-        options:
-          preview:
-            text:
-              - key: title
-      meta.title:
-        type: text
-        comment: Browser tab title and OG title.
-      meta.description:
-        type: textarea
-        options:
-          rows: 2
-        comment: Meta description for search engines and social previews.
-
-      # ---- Hero blocks ----
+        comment: SEO title and description for this page.
       hero:
         type: object
-        comment: Top-of-page hero section.
-      hero.eyebrow:
-        type: text
-        comment: Small label above the heading.
-      hero.headline:
-        type: text
-      hero.heading:
-        type: text
-      hero.subheadline:
-        type: textarea
-        options:
-          rows: 2
-      hero.lede:
-        type: textarea
-        options:
-          rows: 2
-        comment: One-line summary shown beneath the heading.
-      hero.lastUpdated:
-        type: text
-
-      # ---- CTAs ----
-      hero.primaryCTA:
-        type: object
-        comment: Filled gold button.
-      hero.secondaryCTA:
-        type: object
-        comment: Outline / ghost button.
-      hero.trustItems:
-        type: array
-        comment: Small social-proof items shown beneath the hero CTAs.
-
+        comment: The page hero (eyebrow, heading, lede, CTAs, trust items).
       cta:
         type: object
         comment: Bottom-of-page conversion banner.
-      cta.heading:
-        type: text
-      cta.description:
-        type: textarea
-        options:
-          rows: 2
-      cta.ctaLabel:
-        type: text
-      cta.ctaHref:
-        type: text
-
-      # ---- Home page ----
-      servicesPreview.items:
-        type: array
-        comment: The three service cards shown on the home page.
-      aboutTeaser.stats:
-        type: array
-        comment: Four stat tiles in the home page "about" section.
-      testimonials.items:
-        type: array
-        comment: Client testimonials shown on the home page.
-
-      # ---- About ----
+      servicesPreview:
+        type: object
+        comment: The three-card services preview section on the home page.
+      aboutTeaser:
+        type: object
+        comment: The split "about the firm" section on the home page.
+      testimonials:
+        type: object
+        comment: Client testimonials block on the home page.
       story:
         type: object
-      values.items:
-        type: array
-        comment: Four firm values.
-      timeline.items:
-        type: array
-        comment: Milestone entries — each has a year and a one-line description.
-      teamPreview.members:
-        type: array
-        comment: Three team-member previews shown on the About page.
-
-      # ---- Services ----
+        comment: The "Our Story" prose section on the About page.
+      values:
+        type: object
+        comment: Four firm values shown on the About page.
+      timeline:
+        type: object
+        comment: Milestone timeline on the About page.
+      teamPreview:
+        type: object
+        comment: Three team members previewed on the About page.
       services:
         type: array
-        comment: All service cards shown on /services/. Each card has icon, title, description, and audience.
-      process.steps:
-        type: array
-        comment: The four-step engagement process.
-      fees.tiers:
-        type: array
-        comment: AUM fee tiers shown in the fee table.
-
-      # ---- Team ----
+        comment: Service cards on the Services page. Reorder, add, or remove freely.
+      process:
+        type: object
+        comment: Four-step process shown on the Services page.
+      fees:
+        type: object
+        comment: Fee structure section with AUM tiers.
       members:
         type: array
-        comment: Full team members shown on /team/.
-
-      # ---- Contact ----
+        comment: Full team members shown on the Team page.
       info:
         type: object
-        comment: Static labels for the contact-info column.
+        comment: Contact info column labels on the Contact page.
       form:
         type: object
         comment: Contact form labels and post-submit message.
       calendly:
         type: object
-
-      # ---- Privacy ----
+        comment: Optional "Schedule on Calendly" CTA below the contact form.
       intro:
         type: textarea
+        comment: Opening paragraph on the Privacy page.
         options:
           rows: 4
       sections:
         type: array
-        comment: Privacy-policy sections. Each entry has a heading and a body paragraph (markdown allowed for bold and lists).
-
-    # Map each filename to the URL where it can be previewed in the Visual Editor.
-    _paths_options:
-      index.json: { preview_url: "/" }
-      about.json: { preview_url: "/about/" }
-      services.json: { preview_url: "/services/" }
-      team.json: { preview_url: "/team/" }
-      contact.json: { preview_url: "/contact/" }
-      privacy.json: { preview_url: "/privacy/" }
+        comment: Privacy-policy sections. Each entry has a heading and a body (markdown allowed for bold, lists, links).
 
   # ------------------------------------------------------------------
   # SITE SETTINGS — brand, nav, footer, contact, SEO. Shared chrome.
@@ -193,69 +109,21 @@ collections_config:
       brand:
         type: object
         comment: Logo wordmark and footer tagline.
-      brand.title:
-        type: text
-        comment: Wordmark text (e.g. "Hargrove Wealth").
-      brand.tag:
-        type: text
-        comment: Small tag printed after the wordmark (e.g. "Advisory").
-      brand.footerTagline:
-        type: textarea
-        options:
-          rows: 2
-
       contact:
         type: object
-        comment: Phone, email, address, and business hours. Used in the footer, contact page, and structured data.
-      contact.phone:
-        type: text
-        comment: Display number (e.g. "(555) 280-4400").
-      contact.phoneHref:
-        type: text
-        comment: tel: link target (e.g. "tel:+15552804400").
-      contact.email:
-        type: text
-      contact.emailHref:
-        type: text
-        comment: mailto: link target.
-      contact.addressLine1:
-        type: text
-      contact.addressLine2:
-        type: text
-      contact.addressLine3:
-        type: text
-      contact.hours:
-        type: text
-
+        comment: Phone, email, address, and business hours.
       nav:
         type: object
         comment: Top navigation links and CTA button.
-      nav.links:
-        type: array
-        comment: Top-level navigation items. Each has a label and href.
-      nav.ctaLabel:
-        type: text
-      nav.ctaHref:
-        type: text
-
       footer:
         type: object
         comment: Footer column headings, link sets, copyright, and disclaimer.
-      footer.quickLinks:
-        type: array
-      footer.serviceLinks:
-        type: array
-      footer.disclaimer:
-        type: textarea
-        options:
-          rows: 2
-
       seo:
         type: object
         comment: Default SEO values when a page does not set its own.
 
   # ------------------------------------------------------------------
-  # BLOG POSTS — Astro content collection, one Markdown file per post.
+  # BLOG POSTS — Astro content collection.
   # ------------------------------------------------------------------
   blog:
     path: src/content/blog
@@ -292,7 +160,7 @@ collections_config:
         comment: Publication date. Sorts the blog index newest first.
       author:
         type: text
-        comment: Author's display name (e.g. "Robert Hargrove").
+        comment: Author's display name.
       excerpt:
         type: textarea
         options:
@@ -300,7 +168,7 @@ collections_config:
         comment: Short summary shown on the blog index card and in social previews.
       image:
         type: image
-        comment: Optional hero image. If omitted, the post falls back to the site OG image.
+        comment: Optional hero image.
         options:
           paths:
             uploads: public/uploads
