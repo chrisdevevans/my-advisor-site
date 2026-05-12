@@ -6,6 +6,9 @@ author: Hargrove Wealth
 excerpt: >-
   A short summary of this post — appears on the blog index card and in social
   previews.
-tags: []
+tags:
+  - Wealth Management
+  - Tax Planning
+  - Investment
 ---
 Write the post body here. Use `##` for section headings.
